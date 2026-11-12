@@ -1,0 +1,66 @@
+name: EURO ARMS — générer la narration Desert Eagle
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "episodes/001-desert-eagle/episode.json"
+      - ".github/workflows/generate-episode-001.yml"
+      - "scripts/generate_episode_audio.py"
+
+permissions:
+  contents: read
+
+jobs:
+  narration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer Piper
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install piper-tts
+
+      - name: Télécharger le modèle vocal approuvé
+        run: |
+          mkdir -p .voice-cache
+          python -m piper.download_voices fr_FR-mls-medium --data-dir .voice-cache
+
+      - name: Générer les segments et les vrais timecodes
+        run: python scripts/generate_episode_audio.py
+
+      - name: Vérifier les livrables audio
+        run: |
+          test -s dist/episode-001/narration-complete.wav
+          test -s dist/episode-001/timeline.json
+          test -s dist/episode-001/ATTRIBUTION.txt
+          python - <<'PY'
+          import json, wave
+          from pathlib import Path
+          root = Path("dist/episode-001")
+          timeline = json.loads((root / "timeline.json").read_text())
+          with wave.open(str(root / "narration-complete.wav"), "rb") as audio:
+              actual = audio.getnframes() / audio.getframerate()
+          assert len(timeline["segments"]) == 6, "Nombre de segments inattendu"
+          assert abs(actual - timeline["duration"]) < 0.08, "Durée audio et timeline différentes"
+          assert all(s["end"] > s["start"] for s in timeline["segments"])
+          assert all(timeline["segments"][i]["end"] <= timeline["segments"][i+1]["start"] for i in range(5))
+          print(f"Contrôle OK : {actual:.2f} secondes, {len(timeline['segments'])} scènes.")
+          PY
+
+      - name: Publier les fichiers audio et la timeline
+        uses: actions/upload-artifact@v4
+        with:
+          name: EURO-ARMS-EP001-NARRATION
+          path: dist/episode-001/
+          if-no-files-found: error
+          retention-days: 14
