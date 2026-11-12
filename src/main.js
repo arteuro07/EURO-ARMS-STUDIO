@@ -147,6 +147,63 @@ const makeEnvironment = (index) => {
   const strip = new THREE.Mesh(new THREE.BoxGeometry(.025, 2.4, .025), frameMat);
   strip.position.set(index - 2.5, 1.5, -3.15);
   group.add(strip);
+
+  // Accessoires narratifs propres à chaque époque : aucun élément mécanique fonctionnel.
+  const props = new THREE.Group();
+  group.add(props);
+  const accent = new THREE.MeshStandardMaterial({
+    color: ['#76563a','#71808c','#b08a58','#8e7051','#36738d','#b59b75'][index],
+    metalness: .42, roughness: .56
+  });
+  const muted = new THREE.MeshStandardMaterial({ color: '#202831', roughness: .86 });
+  if (index === 0) {
+    const bench = new THREE.Mesh(new THREE.BoxGeometry(4.8,.18,1.1), muted);
+    bench.position.set(0,.38,-1.8); props.add(bench);
+    for (let x of [-1.9,1.9]) {
+      const leg = new THREE.Mesh(new THREE.BoxGeometry(.12,.75,.12), accent);
+      leg.position.set(x,.02,-1.8); props.add(leg);
+    }
+    const lamp = new THREE.Group();
+    const stem = new THREE.Mesh(new THREE.CylinderGeometry(.025,.04,.8,12), accent);
+    stem.position.y=.4; lamp.add(stem);
+    const shade = new THREE.Mesh(new THREE.ConeGeometry(.25,.22,24,1,true), accent);
+    shade.position.set(0,.82,0); shade.rotation.x=Math.PI; lamp.add(shade);
+    lamp.position.set(-1.7,1.0,-1.65); props.add(lamp);
+    group.userData.movingProp = lamp;
+  } else if (index === 1) {
+    for (let n=0;n<4;n++) {
+      const sheet = new THREE.Mesh(new THREE.PlaneGeometry(.72,.94), accent);
+      sheet.position.set(-1.5+n*.95,1.0+n*.18,-2.1);
+      sheet.rotation.y=(n-1.5)*.12; props.add(sheet);
+    }
+    group.userData.movingProp = props;
+  } else if (index === 2) {
+    for (let n=0;n<3;n++) {
+      const halo = new THREE.Mesh(new THREE.TorusGeometry(.8+n*.38,.018,8,72), accent);
+      halo.position.set(0,1.5,-1.9+n*.08);
+      props.add(halo);
+    }
+    group.userData.movingProp = props;
+  } else if (index === 3) {
+    for (let n=0;n<5;n++) {
+      const marker = new THREE.Mesh(new THREE.BoxGeometry(.12,.35+n*.12,.12), accent);
+      marker.position.set(-1.2+n*.6,.18+(n*.06),-2.0);
+      props.add(marker);
+    }
+    group.userData.movingProp = props;
+  } else if (index === 4) {
+    const portal = new THREE.Mesh(new THREE.TorusGeometry(1.05,.045,12,80), accent);
+    portal.position.set(0,1.55,-2.0); props.add(portal);
+    const inner = new THREE.Mesh(new THREE.TorusGeometry(.72,.018,8,80), frameMat);
+    inner.position.copy(portal.position); props.add(inner);
+    group.userData.movingProp = props;
+  } else {
+    for (let n=0;n<3;n++) {
+      const column = new THREE.Mesh(new THREE.BoxGeometry(.045,3.1,.045), accent);
+      column.position.set(-1.8+n*1.8,1.55,-2.3); props.add(column);
+    }
+    group.userData.movingProp = props;
+  }
   group.userData.glow = glow;
   group.userData.strip = strip;
   group.visible = index === 0;
@@ -343,7 +400,15 @@ renderer.setAnimationLoop(() => {
     artifact.rotation.x = Math.sin(elapsed * .32) * .025 + p * .06;
     artifact.rotation.y = Math.sin(elapsed * .22) * .035;
     const env = environments[activeSceneIndex % environments.length];
-    if (env) { env.userData.strip.position.y = 1.5 + Math.sin(elapsed * .5) * .12; env.userData.glow.intensity = 8 + Math.sin(elapsed * .7) * 1.1; }
+    if (env) {
+      env.userData.strip.position.y = 1.5 + Math.sin(elapsed * .5) * .12;
+      env.userData.glow.intensity = 8 + Math.sin(elapsed * .7) * 1.1;
+      const prop = env.userData.movingProp;
+      if (prop) {
+        prop.rotation.y = Math.sin(elapsed * .22 + activeSceneIndex) * .045;
+        prop.position.y = Math.sin(elapsed * .48 + activeSceneIndex) * .035;
+      }
+    }
     artifact.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), damping);
   } else {
     pedestal.rotation.y += (targetRotation - pedestal.rotation.y) * damping;
