@@ -67,22 +67,92 @@ block(2.22, .045, 1.38, bronze, .96);
 const artifact = new THREE.Group();
 artifact.position.set(0, 1.55, 0);
 pedestal.add(artifact);
-const core = new THREE.Mesh(
-  new THREE.TorusKnotGeometry(.48, .13, 120, 16, 2, 3),
-  new THREE.MeshStandardMaterial({ color: '#a7adb0', metalness: .82, roughness: .24 })
-);
-core.rotation.x = Math.PI / 2.8;
-core.castShadow = true;
-artifact.add(core);
-const ring = new THREE.Mesh(new THREE.TorusGeometry(.82, .018, 12, 96), bronze);
-ring.rotation.x = Math.PI / 2;
-artifact.add(ring);
-const orb = new THREE.Mesh(
-  new THREE.SphereGeometry(.11, 32, 24),
-  new THREE.MeshStandardMaterial({ color: '#d5bd94', metalness: .6, roughness: .22, emissive: '#332414' })
-);
-orb.position.set(0, .6, 0);
-artifact.add(orb);
+// Silhouette muséale simplifiée du Desert Eagle : représentation visuelle
+// non fonctionnelle, sans coupe interne ni détail de fabrication.
+const steel = new THREE.MeshStandardMaterial({ color: '#8d969b', metalness: .86, roughness: .28 });
+const steelDark = new THREE.MeshStandardMaterial({ color: '#343c42', metalness: .72, roughness: .34 });
+const gripMat = new THREE.MeshStandardMaterial({ color: '#302b26', metalness: .18, roughness: .78 });
+const goldLine = new THREE.MeshStandardMaterial({ color: '#b69a70', metalness: .72, roughness: .3 });
+const profile = new THREE.Shape();
+profile.moveTo(-1.18, .12);
+profile.lineTo(-1.12, .48);
+profile.lineTo(-.92, .58);
+profile.lineTo(.98, .58);
+profile.lineTo(1.28, .48);
+profile.lineTo(1.34, .28);
+profile.lineTo(1.18, .16);
+profile.lineTo(.24, .13);
+profile.lineTo(-.16, .03);
+profile.lineTo(-.20, -.42);
+profile.lineTo(-.48, -.88);
+profile.lineTo(-.91, -.78);
+profile.lineTo(-.78, -.05);
+profile.lineTo(-1.05, -.02);
+profile.closePath();
+const body = new THREE.Mesh(new THREE.ExtrudeGeometry(profile, {
+  depth: .25, bevelEnabled: true, bevelSegments: 3, steps: 1, bevelSize: .035, bevelThickness: .035
+}), steel);
+body.position.z = -.125;
+body.castShadow = true;
+artifact.add(body);
+const slide = new THREE.Mesh(new THREE.BoxGeometry(1.72, .12, .29), steelDark);
+slide.position.set(-.02, .49, 0);
+slide.castShadow = true;
+artifact.add(slide);
+const barrelAccent = new THREE.Mesh(new THREE.CylinderGeometry(.105, .105, .035, 32), steelDark);
+barrelAccent.rotation.x = Math.PI / 2;
+barrelAccent.position.set(1.25, .35, .145);
+artifact.add(barrelAccent);
+const gripPanel = new THREE.Mesh(new THREE.BoxGeometry(.37, .55, .035), gripMat);
+gripPanel.position.set(-.62, -.39, .155);
+gripPanel.rotation.z = -.18;
+artifact.add(gripPanel);
+const trim = new THREE.Mesh(new THREE.BoxGeometry(1.35, .018, .012), goldLine);
+trim.position.set(-.02, .405, .16);
+artifact.add(trim);
+const museumRing = new THREE.Mesh(new THREE.TorusGeometry(.88, .012, 10, 100), bronze);
+museumRing.rotation.x = Math.PI / 2;
+museumRing.position.y = .12;
+artifact.add(museumRing);
+
+// Six distinct miniature environments: workshop, archive, 1983 launch,
+// large-calibre era, videogame contrast, and closing museum portrait.
+const environments = [];
+const makeEnvironment = (index) => {
+  const group = new THREE.Group();
+  scene.add(group);
+  const wallMat = new THREE.MeshStandardMaterial({
+    color: ['#40362d','#28313a','#343a3d','#382f2b','#172d3a','#252d34'][index],
+    roughness: .92, metalness: .04
+  });
+  const wall = new THREE.Mesh(new THREE.PlaneGeometry(12, 7), wallMat);
+  wall.position.set(0, 2.8, -3.4);
+  group.add(wall);
+  const frameMat = new THREE.MeshStandardMaterial({
+    color: ['#8e6c48','#75818a','#b08a58','#9a7959','#4c829a','#b59b75'][index],
+    metalness: .5, roughness: .48
+  });
+  for (let j = 0; j < 3; j++) {
+    const bar = new THREE.Mesh(new THREE.BoxGeometry(2.1, .035, .05), frameMat);
+    bar.position.set(-2.5 + j * 2.5, 1.2 + (j % 2) * .65, -3.25);
+    group.add(bar);
+  }
+  const glow = new THREE.PointLight(
+    ['#d49a5e','#9aafc1','#e2bd83','#d39a67','#4d9ec4','#d9c19a'][index],
+    [10,7,12,11,8,13][index], 8
+  );
+  glow.position.set(index % 2 ? -2.4 : 2.4, 2.6, -1.7);
+  group.add(glow);
+  // Animated vertical dust motes and archival light strips are deliberately subtle.
+  const strip = new THREE.Mesh(new THREE.BoxGeometry(.025, 2.4, .025), frameMat);
+  strip.position.set(index - 2.5, 1.5, -3.15);
+  group.add(strip);
+  group.userData.glow = glow;
+  group.userData.strip = strip;
+  group.visible = index === 0;
+  environments.push(group);
+};
+for (let i = 0; i < 6; i++) makeEnvironment(i);
 
 // Fine floating dust adds depth without bright particles or excessive bloom.
 const dustGeometry = new THREE.BufferGeometry();
@@ -131,6 +201,7 @@ function updateSceneFromTime(seconds) {
   if (index !== activeSceneIndex) {
     activeSceneIndex = index;
     const preset = shotPresets[index % shotPresets.length];
+    environments.forEach((environment, sceneIndex) => { environment.visible = sceneIndex === index % environments.length; });
     targetCamera.set(...preset.camera);
     targetLook.set(...preset.look);
     targetRotation = preset.rotation;
@@ -271,6 +342,8 @@ renderer.setAnimationLoop(() => {
     const p = artifact.userData.sceneProgress || 0;
     artifact.rotation.x = Math.sin(elapsed * .32) * .025 + p * .06;
     artifact.rotation.y = Math.sin(elapsed * .22) * .035;
+    const env = environments[activeSceneIndex % environments.length];
+    if (env) { env.userData.strip.position.y = 1.5 + Math.sin(elapsed * .5) * .12; env.userData.glow.intensity = 8 + Math.sin(elapsed * .7) * 1.1; }
     artifact.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), damping);
   } else {
     pedestal.rotation.y += (targetRotation - pedestal.rotation.y) * damping;
