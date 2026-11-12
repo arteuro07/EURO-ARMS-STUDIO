@@ -22,7 +22,16 @@
         <section class="stage-wrap">
           <div class="stage-heading"><span>APERÇU DE LA SCÈNE</span><span id="render-state">INITIALISATION…</span></div>
           <div id="stage" aria-label="Scène 3D interactive"></div>
-          <div class="stage-caption"><span>ÉTUDE DE MATIÈRE · VOLUME 3D</span><span>FAITES GLISSER POUR ORBITER</span></div>
+          <div class="stage-caption"><span id="scene-label">APERÇU CINÉMATIQUE</span><span id="scene-clock">EN ATTENTE DE LA TIMELINE</span></div>
+        </section>
+        <section class="audio-lab">
+          <div><p class="eyebrow">SYNCHRONISATION RÉELLE</p><h2>La scène suit la narration.</h2><p>Charge le WAV complet et le fichier timeline.json générés par GitHub Actions. Les changements de scène suivront leurs timecodes mesurés.</p></div>
+          <div class="audio-load">
+            <label class="file-label">1 · FICHIER AUDIO WAV<input id="audio-file" type="file" accept="audio/wav,audio/x-wav"></label>
+            <label class="file-label">2 · TIMELINE JSON<input id="timeline-file" type="file" accept="application/json,.json"></label>
+            <audio id="narration-player" controls preload="metadata"></audio>
+            <p id="sync-status" role="status">Aucun audio chargé.</p>
+          </div>
         </section>
         <section class="controls">
           <div class="control-copy"><p class="eyebrow">ÉTALONNAGE VISUEL</p><h2>La lumière, avec mesure.</h2><p>Réglez l’image sans perdre les détails dans les ombres ni les hautes lumières.</p></div>
