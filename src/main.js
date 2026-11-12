@@ -238,7 +238,7 @@ sceneTitles.forEach((lines, index) => {
   ctx.font = '500 26px monospace';
   ctx.fillStyle = '#c7a879';
   ctx.fillText(lines[0], 76, 63);
-  ctx.font = '700  forty eight px sans-serif'.replace('forty eight', '48');
+  ctx.font = '700 48px sans-serif';
   ctx.fillStyle = '#f0eee8';
   ctx.fillText(lines[1], 76, 132);
   ctx.font = '22px monospace';
@@ -250,7 +250,7 @@ sceneTitles.forEach((lines, index) => {
     map: texture, transparent: true, opacity: 0.94, depthWrite: false
   });
   const card = new THREE.Mesh(new THREE.PlaneGeometry(3.7, .925), material);
-  card.position.set(-1.85, 2.65, -2.95);
+  card.position.set(0, 2.65, -2.95);
   card.visible = index === 0;
   scene.add(card);
   titleCards.push(card);
