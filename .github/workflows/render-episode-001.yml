@@ -1,0 +1,94 @@
+name: EURO ARMS — rendre la vidéo Desert Eagle
+
+on:
+  workflow_run:
+    workflows: ["EURO ARMS — générer la narration Desert Eagle"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      narration_run_id:
+        description: "ID du build de narration contenant EURO-ARMS-EP001-NARRATION"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  render:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Récupérer le code de la version narrée
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Installer les dépendances du studio
+        run: |
+          npm install
+          npm install --no-save playwright
+
+      - name: Installer Chromium et les outils vidéo
+        run: |
+          npx playwright install --with-deps chromium
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg xvfb
+
+      - name: Télécharger la narration validée
+        uses: actions/download-artifact@v4
+        with:
+          name: EURO-ARMS-EP001-NARRATION
+          path: dist/episode-001
+          run-id: ${{ github.event.workflow_run.id || inputs.narration_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Vérifier le serveur et capturer les scènes 3D
+        run: |
+          test -s dist/episode-001/narration-complete.wav
+          test -s dist/episode-001/timeline.json
+          xvfb-run -a -s "-screen 0 720x1280x24" bash -c '
+            set -e
+            npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/euro-vite.log 2>&1 &
+            SERVER_PID=$!
+            trap "kill $SERVER_PID 2>/dev/null || true" EXIT
+            for attempt in $(seq 1 60); do
+              if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
+              sleep 1
+            done
+            curl -fsS http://127.0.0.1:4173/ >/dev/null
+            node scripts/render_episode_001.mjs
+          '
+
+      - name: Assembler le MP4 vertical avec la narration
+        shell: bash
+        run: |
+          set -euo pipefail
+          DURATION=$(python -c "import json; print(json.load(open('dist/episode-001/timeline.json'))['duration'])")
+          ffmpeg -y -ss 0.45 -i dist/episode-001/scene-capture.mp4 \
+            -i dist/episode-001/narration-complete.wav -t "$DURATION" \
+            -map 0:v:0 -map 1:a:0 \
+            -vf "scale=1080:1920:flags=lanczos,setsar=1" -r 30 \
+            -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p \
+            -c:a aac -b:a 192k -shortest -movflags +faststart \
+            dist/episode-001/EURO-ARMS-EP001-DESERT-EAGLE.mp4
+          test -s dist/episode-001/EURO-ARMS-EP001-DESERT-EAGLE.mp4
+          ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 dist/episode-001/EURO-ARMS-EP001-DESERT-EAGLE.mp4 | grep -qx '1080x1920'
+          ffprobe -v error -show_entries format=duration -of csv=p=0 dist/episode-001/EURO-ARMS-EP001-DESERT-EAGLE.mp4
+
+      - name: Publier le MP4
+        uses: actions/upload-artifact@v4
+        with:
+          name: EURO-ARMS-EP001-DESERT-EAGLE-MP4
+          path: |
+            dist/episode-001/EURO-ARMS-EP001-DESERT-EAGLE.mp4
+            dist/episode-001/ATTRIBUTION.txt
+          if-no-files-found: error
+          retention-days: 14
