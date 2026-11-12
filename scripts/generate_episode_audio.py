@@ -32,7 +32,7 @@ for index, segment in enumerate(segments, start=1):
     })
     wav_parts.append((segment, output))
 
-payload = "".join(json.dumps(item, ensure_ascii=False) + "\\n" for item in requests)
+payload = "".join(json.dumps(item, ensure_ascii=False) + "\n" for item in requests)
 command = [
     "python", "-m", "piper",
     "-m", "fr_FR-mls-medium",
@@ -87,7 +87,7 @@ with wave.open(str(combined_path), "wb") as combined:
 
         if index < len(wav_parts) - 1:
             silence_frames = round(sample_rate * silence_seconds)
-            combined.writeframes(b"\\x00" * silence_frames * channels * 2)
+            combined.writeframes(b"\x00" * silence_frames * channels * 2)
             cursor += silence_seconds
 
 result = {
@@ -104,16 +104,16 @@ result = {
     "segments": timeline
 }
 (OUT / "timeline.json").write_text(
-    json.dumps(result, ensure_ascii=False, indent=2) + "\\n",
+    json.dumps(result, ensure_ascii=False, indent=2) + "\n",
     encoding="utf-8"
 )
 (OUT / "ATTRIBUTION.txt").write_text(
-    "Voix générée avec Piper et le modèle fr_FR-mls-medium, locuteur 0.\\n"
-    "Fiche du modèle et informations d'attribution :\\n"
-    "https://huggingface.co/rhasspy/piper-voices/tree/main/fr/fr_FR/mls/medium\\n"
+    "Voix générée avec Piper et le modèle fr_FR-mls-medium, locuteur 0.\n"
+    "Fiche du modèle et informations d'attribution :\n"
+    "https://huggingface.co/rhasspy/piper-voices/tree/main/fr/fr_FR/mls/medium\n"
     "Dataset MLS indiqué sous CC-BY-4.0 dans la fiche du modèle. "
-    "Vérifier et conserver les mentions d'attribution applicables lors de toute redistribution.\\n"
-    "Moteur Piper : https://github.com/OHF-Voice/piper1-gpl\\n",
+    "Vérifier et conserver les mentions d'attribution applicables lors de toute redistribution.\n"
+    "Moteur Piper : https://github.com/OHF-Voice/piper1-gpl\n",
     encoding="utf-8"
 )
 print(f"Audio complet : {combined_path}")
