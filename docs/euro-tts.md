@@ -3,47 +3,52 @@
 ## Objectif
 Créer une identité de narration masculine, française et stable d'un épisode à l'autre. Aucun enregistrement personnel de l'utilisateur ne sera utilisé.
 
-## Moteur prototype
-- Runtime étudié : Pocket TTS de Kyutai.
-- Le modèle prend en charge le français et accepte un fichier audio de référence.
-- Le moteur fonctionne sur CPU ; le rendu sera exécuté sur GitHub Actions pour éviter de charger le téléphone.
-- Sortie cible : WAV ; fréquence et format exacts à confirmer par un test d'intégration.
-- Les voix prédéfinies autres que la voix française native sont principalement des références anglaises ; le dépôt Pocket TTS recommande une référence correspondant à la langue cible.
+## Moteurs étudiés
+- **Pocket TTS de Kyutai** : prend en charge le français, accepte une référence audio et fonctionne sur CPU. La voix française intégrée est féminine ; la référence masculine adaptée reste à trouver.
+- **Piper (Open Home Foundation)** : moteur local CPU, installation officielle par `pip install piper-tts`. Il est utilisé ici pour une audition comparative de voix françaises pré-entraînées, sans entraînement ni clonage d'une voix personnelle.
+- Le rendu des échantillons est prévu sur GitHub Actions, afin de ne pas charger le téléphone.
+
+## Audition comparative en préparation
+Le workflow manuel `.github/workflows/voice-audition.yml` génère trois WAV lisant exactement le même texte :
+- **fr_FR-tom-medium** : français, qualité medium, 44,1 kHz. Les poids sont sous AGPL-3.0 ; l'auteur accorde une autorisation vocale gratuite avec conditions supplémentaires. La voix ne doit pas être présentée comme appartenant à une personne réelle ou identifiée ; l'identité de l'auteur ne doit pas être communiquée aux utilisateurs finaux. Tout modèle vocal dérivé des poids ou de l'audio doit être publié sous AGPL-3.0.
+- **fr_FR-gilles-low** : français, qualité low, 16 kHz. La fiche du modèle indique une source CC0, mais le modèle est de faible qualité et sert uniquement de point de comparaison. La fiche précise qu'il a été affiné à partir d'une voix anglaise.
+- **fr_FR-mls-medium, speaker 0** : français, qualité medium, 22,05 kHz, modèle annoncé avec 125 locuteurs. La fiche indique le dataset MLS sous CC BY 4.0 ; le genre du locuteur 0 n'est pas confirmé et devra être contrôlé à l'écoute.
+
+Ces voix ne sont pas encore validées. L'écoute doit évaluer le timbre, le naturel, l'articulation, la prononciation des noms propres et la capacité à soutenir un ton documentaire. Le test n'entraîne ni ne clone une voix et ne sélectionne pas automatiquement le profil final.
 
 ## Choix de la voix — statut juridique et technique
-
-### Pistes examinées
-- **Estelle (Pocket TTS)** : voix française native intégrée, mais féminine ; ne correspond pas à notre direction.
-- **Marius et Javert (Kyutai / Unmute)** : voix masculines issues de dons volontaires, publiées en CC0. Les fichiers de référence fournis dans le catalogue Pocket TTS sont identifiés comme anglais ; ce n'est donc pas notre choix direct pour une narration française sans test d'accent.
-- **Fabieng (Unmute)** : voix française jouée par Neil Zeghidour. Le dépôt Kyutai décrit ce fichier parmi les enregistrements propres à Kyutai utilisables en CC0. Cependant, nous n'avons pas trouvé de permission distincte et explicite du comédien couvrant le clonage de cette voix. Ne pas l'utiliser comme référence de clonage sur la seule base de la licence du fichier.
-- **Dons vocaux Unmute** : les conditions du projet autorisent explicitement la transformation et la réutilisation des contributions, y compris commerciale, et indiquent que la réplication vocale peut en résulter. Le catalogue public compte 228 dons vérifiés, mais nous n'avons pas identifié de fichier de donneur à la fois masculin et enregistré en français. Les voix masculines préconfigurées Marius/Javert sont listées en anglais.
-- **Piper fr_FR-tom-medium (solution de repli)** : voix française masculine de qualité medium. Le modèle est sous AGPLv3 et son auteur publie des conditions supplémentaires d'autorisation de la voix : ne pas présenter la voix comme appartenant à une personne réelle ou identifiée, ne pas révéler l'identité de l'auteur aux utilisateurs finaux, et publier sous AGPLv3 tout modèle vocal reconstruit à partir de ses poids ou de son audio. Cette option reste à évaluer ; elle ne doit pas être mélangée à Pocket TTS sans raison technique.
+- **Estelle (Pocket TTS)** : voix française native intégrée, féminine ; ne correspond pas à notre direction.
+- **Marius et Javert (Kyutai / Unmute)** : voix masculines issues de dons volontaires CC0, mais les fichiers de référence du catalogue Pocket TTS sont identifiés comme anglais ; ne pas les utiliser pour une narration française sans validation de l'accent.
+- **Fabieng (Unmute)** : voix française jouée par Neil Zeghidour. La licence du fichier est CC0, mais nous n'avons pas trouvé de permission distincte et explicite du comédien couvrant le clonage de cette voix. Ne pas l'utiliser comme référence de clonage sur la seule base de la licence du fichier.
+- **Dons vocaux Unmute** : les conditions du projet autorisent la réutilisation commerciale des contributions et indiquent que la réplication vocale peut en résulter. Le catalogue public compte 228 dons vérifiés, mais nous n'avons pas identifié de fichier de donneur à la fois masculin et enregistré en français.
 - **Henri (Loudkit)** : profil d'un autre moteur, pas une voix directement intégrée à Pocket TTS. L'audio source d'enrôlement n'est pas redistribué avec le profil. Ne pas le brancher directement dans Pocket TTS.
 
 ### Décision actuelle
-Aucune voix n'est encore sélectionnée. Priorité à une référence masculine française dont la provenance et l'autorisation de synthèse vocale sont claires. Si aucune référence adaptée n'est disponible, tester Piper Tom comme moteur de repli plutôt que cloner une voix dont les droits sont incertains.
+Aucune voix n'est encore sélectionnée. Nous comparons d'abord les échantillons Piper. Si aucune voix ne satisfait le niveau de qualité documentaire et les conditions d'usage, nous reprendrons la recherche d'une référence masculine française adaptée à Pocket TTS. Ne pas cloner une voix identifiable sans autorisation appropriée.
 
 ## Pipeline prévu
-1. Identifier une référence masculine française ou un moteur français masculin dont les conditions autorisent clairement l'usage envisagé.
-2. Vérifier la compatibilité exacte avec le moteur choisi.
-3. Générer un test court en français sur GitHub Actions ; écouter et contrôler timbre, naturel, articulation et prononciation.
-4. Comparer les résultats avant de fixer définitivement une seule identité vocale et ses paramètres.
-5. Générer un WAV par segment narratif.
-6. Aligner le texte sur l'audio réellement généré ; les estimations par nombre de mots ne sont qu'un secours temporaire.
-7. Transmettre les vrais timecodes au moteur Three.js et au rendu FFmpeg.
+1. Écouter et comparer les WAV produits par le workflow.
+2. Vérifier les conditions exactes du moteur et du modèle retenus pour le projet et sa diffusion.
+3. Fixer une seule identité vocale et des paramètres constants pour tous les épisodes.
+4. Générer un WAV par segment narratif.
+5. Aligner le texte sur l'audio réellement généré ; les estimations par nombre de mots ne sont qu'un secours temporaire.
+6. Transmettre les vrais timecodes au moteur Three.js et au rendu FFmpeg.
 
 ## Limites actuelles
-- La référence masculine finale n'est pas sélectionnée.
+- Le workflow d'audition est ajouté, mais il n'a pas encore été lancé.
 - Aucun WAV EURO TTS n'a encore été généré ni validé.
-- L'entraînement complet depuis zéro est hors de portée du pipeline gratuit actuel ; priorité à un modèle existant et à une référence dûment autorisée.
-- Aucun fichier vocal ne doit être ajouté au dépôt avant vérification des droits et de l'attribution.
+- L'entraînement complet depuis zéro est hors de portée du pipeline gratuit actuel ; priorité à un moteur existant et à des droits vérifiés.
+- Aucun fichier vocal ni poids de modèle ne doit être ajouté au dépôt.
 
 ## Références
 - Pocket TTS : https://github.com/kyutai-labs/pocket-tts
 - Catalogue des voix Kyutai : https://huggingface.co/kyutai/tts-voices
 - Conditions du don vocal Unmute : https://kyutai.org/legal/Terms%20of%20Use%20-%20Unmute%20Voice%20Donation%20Project%20v1.pdf
-- Politique de confidentialité Unmute : https://kyutai.org/legal/Privacy%20Policy%20-%20Unmute%20Voice%20Donation%20Project%20v1.pdf
-- Galerie Loudkit : https://loudkit.loudreader.io/voices/
+- Piper officiel : https://github.com/OHF-Voice/piper1-gpl
+- Documentation CLI Piper : https://github.com/OHF-Voice/piper1-gpl/blob/main/docs/CLI.md
 - Piper Tom — fiche modèle : https://huggingface.co/rhasspy/piper-voices/blob/main/fr/fr_FR/tom/medium/MODEL_CARD
 - Piper Tom — conditions de l'auteur : https://github.com/tjiho/French-tts-model-piper
+- Piper Gilles — fiche modèle : https://huggingface.co/rhasspy/piper-voices/blob/main/fr/fr_FR/gilles/low/MODEL_CARD
+- Piper MLS — fiche modèle : https://huggingface.co/rhasspy/piper-voices/blob/main/fr/fr_FR/mls/medium/MODEL_CARD
+- Galerie Loudkit : https://loudkit.loudreader.io/voices/
 - Export d'une voix Pocket TTS : https://kyutai-labs.github.io/pocket-tts/CLI%20Commands/export_voice/
