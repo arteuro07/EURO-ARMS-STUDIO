@@ -367,7 +367,9 @@ function updateSceneFromTime(seconds) {
     const preset = shotPresets[index % shotPresets.length];
     environments.forEach((environment, sceneIndex) => { environment.visible = sceneIndex === index % environments.length; });
     titleCards.forEach((card, cardIndex) => { card.visible = cardIndex === index % titleCards.length; });
-    targetCamera.set(...preset.camera);
+    // Recule légèrement la caméra en 9:16 pour garder l'objet entier dans le cadre vertical.
+    const portraitFraming = camera.aspect < 0.8 ? 1.24 : 1;
+    targetCamera.set(preset.camera[0] * portraitFraming, preset.camera[1] * portraitFraming, preset.camera[2] * portraitFraming);
     targetLook.set(...preset.look);
     targetRotation = preset.rotation;
     targetScale = preset.scale;
