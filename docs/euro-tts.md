@@ -5,11 +5,11 @@ Créer une identité de narration masculine, française et stable d'un épisode 
 
 ## Moteurs étudiés
 - **Pocket TTS de Kyutai** : prend en charge le français, accepte une référence audio et fonctionne sur CPU. La voix française intégrée est féminine ; la référence masculine adaptée reste à trouver.
-- **Piper (Open Home Foundation)** : moteur local CPU, installation officielle par `pip install piper-tts`. Il est utilisé ici pour une audition comparative de voix françaises pré-entraînées, sans entraînement ni clonage d'une voix personnelle.
-- Le rendu des échantillons est prévu sur GitHub Actions, afin de ne pas charger le téléphone.
+- **Piper (Open Home Foundation)** : moteur local CPU, installation officielle par `pip install piper-tts`. Il est retenu pour générer la narration française avec le modèle MLS, locuteur 0, sans entraînement ni clonage d'une voix personnelle.
+- La génération de la narration est exécutée sur GitHub Actions, afin de ne pas charger le téléphone.
 
 ## Comparaison initiale des voix (historique)
-Le workflow manuel `.github/workflows/voice-audition.yml` génère trois WAV lisant exactement le même texte :
+Le workflow d'audition `.github/workflows/voice-audition.yml` avait produit trois échantillons de comparaison lisant le même texte :
 - **fr_FR-tom-medium** : français, qualité medium, 44,1 kHz. Les poids sont sous AGPL-3.0 ; l'auteur accorde une autorisation vocale gratuite avec conditions supplémentaires. La voix ne doit pas être présentée comme appartenant à une personne réelle ou identifiée ; l'identité de l'auteur ne doit pas être communiquée aux utilisateurs finaux. Tout modèle vocal dérivé des poids ou de l'audio doit être publié sous AGPL-3.0.
 - **fr_FR-gilles-low** : français, qualité low, 16 kHz. La fiche du modèle indique une source CC0, mais le modèle est de faible qualité et sert uniquement de point de comparaison. La fiche précise qu'il a été affiné à partir d'une voix anglaise.
 - **fr_FR-mls-medium, speaker 0** : français, qualité medium, 22,05 kHz, modèle annoncé avec 125 locuteurs. La fiche indique le dataset MLS sous CC BY 4.0 ; le genre du locuteur 0 n'est pas confirmé et devra être contrôlé à l'écoute.
