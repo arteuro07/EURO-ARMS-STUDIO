@@ -1,0 +1,25 @@
+{
+  "id": "001",
+  "title": "Desert Eagle : une légende venue du réel",
+  "weapon": "Desert Eagle",
+  "language": "fr-FR",
+  "targetSeconds": 55,
+  "voiceProfile": "euro-documentary-fr-01",
+  "visualStyle": {
+    "look": "cinematic historical documentary",
+    "palette": ["slate blue", "neutral steel", "restrained warm bronze"],
+    "exposure": "protect highlights; preserve shadow detail",
+    "contrast": "medium, filmic, never crushed",
+    "saturation": "moderate, natural materials",
+    "whiteBalance": "consistent neutral-warm",
+    "avoid": ["neon colors", "overexposure", "crushed blacks", "excessive bloom", "game-like UI"]
+  },
+  "segments": [
+    {"id":"s01","words":19,"text":"Sur Free Fire, tu utilises cette arme sans connaître son histoire… Je vais te la raconter.","visualPrompt":"Cinematic museum reveal of a Desert Eagle silhouette behind glass, dark archive room, restrained warm rim light, historically grounded, no text","motion":"camera-dolly-in"},
+    {"id":"s02","words":21,"text":"À la fin des années soixante-dix, Magnum Research travaille sur l’idée d’un pistolet semi-automatique de très gros calibre.","visualPrompt":"Late 1970s engineering workshop, archival design sketches and metal drafting tools, period-correct atmosphere, no readable fake labels","motion":"parallax-and-light-sweep"},
+    {"id":"s03","words":20,"text":"Le projet prend forme autour d’une conception inhabituelle, avec un système de fonctionnement inspiré des armes à emprunt de gaz.","visualPrompt":"Accurate technical cutaway-inspired museum illustration of gas-operated mechanism, non-instructional, no assembly steps, clean exhibit lighting","motion":"controlled-part-reveal"},
+    {"id":"s04","words":20,"text":"Le premier modèle de production, le Mark I en .357 Magnum, arrive sur le marché en 1983.","visualPrompt":"Historically plausible early Desert Eagle Mark I display, .357 Magnum era, museum plinth, accurate proportions, no ammunition","motion":"slow-orbit"},
+    {"id":"s05","words":18,"text":"Plus tard, la version .50 Action Express contribue à sa réputation de pistolet spectaculaire.","visualPrompt":"Mid-1990s Desert Eagle .50 AE historical display, neutral studio, close material details, no firing or people","motion":"macro-track"},
+    {"id":"s06","words":16,"text":"Dans le jeu, son image est devenue iconique. Mais son histoire, elle, a commencé dans l’ingénierie bien réelle.","visualPrompt":"Split visual: realistic museum artefact fading into stylized game-inspired abstract silhouette, clearly separated real history and game fiction","motion":"cinematic-pullback"}
+  ]
+}
