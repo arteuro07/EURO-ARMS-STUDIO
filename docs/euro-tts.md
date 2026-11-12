@@ -8,13 +8,13 @@ Créer une identité de narration masculine, française et stable d'un épisode 
 - **Piper (Open Home Foundation)** : moteur local CPU, installation officielle par `pip install piper-tts`. Il est utilisé ici pour une audition comparative de voix françaises pré-entraînées, sans entraînement ni clonage d'une voix personnelle.
 - Le rendu des échantillons est prévu sur GitHub Actions, afin de ne pas charger le téléphone.
 
-## Audition comparative en préparation
+## Comparaison initiale des voix (historique)
 Le workflow manuel `.github/workflows/voice-audition.yml` génère trois WAV lisant exactement le même texte :
 - **fr_FR-tom-medium** : français, qualité medium, 44,1 kHz. Les poids sont sous AGPL-3.0 ; l'auteur accorde une autorisation vocale gratuite avec conditions supplémentaires. La voix ne doit pas être présentée comme appartenant à une personne réelle ou identifiée ; l'identité de l'auteur ne doit pas être communiquée aux utilisateurs finaux. Tout modèle vocal dérivé des poids ou de l'audio doit être publié sous AGPL-3.0.
 - **fr_FR-gilles-low** : français, qualité low, 16 kHz. La fiche du modèle indique une source CC0, mais le modèle est de faible qualité et sert uniquement de point de comparaison. La fiche précise qu'il a été affiné à partir d'une voix anglaise.
 - **fr_FR-mls-medium, speaker 0** : français, qualité medium, 22,05 kHz, modèle annoncé avec 125 locuteurs. La fiche indique le dataset MLS sous CC BY 4.0 ; le genre du locuteur 0 n'est pas confirmé et devra être contrôlé à l'écoute.
 
-Ces voix ne sont pas encore validées. L'écoute doit évaluer le timbre, le naturel, l'articulation, la prononciation des noms propres et la capacité à soutenir un ton documentaire. Le test n'entraîne ni ne clone une voix et ne sélectionne pas automatiquement le profil final.
+Cette comparaison a servi à l'écoute préalable. Le locuteur MLS 0 a ensuite été écouté et approuvé par l'utilisateur pour la narration EURO ARMS. Aucun enregistrement personnel n'est utilisé.
 
 ## Choix de la voix — statut juridique et technique
 - **Estelle (Pocket TTS)** : voix française native intégrée, féminine ; ne correspond pas à notre direction.
