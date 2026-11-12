@@ -211,6 +211,51 @@ const makeEnvironment = (index) => {
 };
 for (let i = 0; i < 6; i++) makeEnvironment(i);
 
+for (let i = 0; i < 6; i++) makeEnvironment(i);
+
+// Cartouches éditoriaux dessinés en haute résolution : repères historiques
+// lisibles dans chaque plan, sans fausses inscriptions générées.
+const sceneTitles = [
+  ["1979", "LE PROJET PREND FORME", "MAGNUM RESEARCH"],
+  ["FIN DES ANNÉES 1970", "UNE IDÉE HORS NORME", "ARCHIVES DE CONCEPTION"],
+  ["CONCEPTION", "UN FONCTIONNEMENT INHABITUEL", "ILLUSTRATION DE PRINCIPE"],
+  ["1983", "LE MARK I .357 MAGNUM", "PREMIER MODÈLE COMMERCIAL"],
+  ["ANNÉES 1990", "LE .50 ACTION EXPRESS", "UNE NOUVELLE DIMENSION"],
+  ["HISTOIRE RÉELLE", "UNE ICÔNE DU JEU VIDÉO", "RÉEL ≠ FICTION"]
+];
+const titleCards = [];
+sceneTitles.forEach((lines, index) => {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024;
+  canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'rgba(13, 19, 25, 0.82)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#c7a879';
+  ctx.fillRect(42, 34, 5, 188);
+  ctx.textBaseline = 'middle';
+  ctx.font = '500 26px monospace';
+  ctx.fillStyle = '#c7a879';
+  ctx.fillText(lines[0], 76, 63);
+  ctx.font = '700  forty eight px sans-serif'.replace('forty eight', '48');
+  ctx.fillStyle = '#f0eee8';
+  ctx.fillText(lines[1], 76, 132);
+  ctx.font = '22px monospace';
+  ctx.fillStyle = '#aeb8c0';
+  ctx.fillText(lines[2], 78, 190);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  const material = new THREE.MeshBasicMaterial({
+    map: texture, transparent: true, opacity: 0.94, depthWrite: false
+  });
+  const card = new THREE.Mesh(new THREE.PlaneGeometry(3.7, .925), material);
+  card.position.set(-1.85, 2.65, -2.95);
+  card.visible = index === 0;
+  scene.add(card);
+  titleCards.push(card);
+});
+
 // Fine floating dust adds depth without bright particles or excessive bloom.
 const dustGeometry = new THREE.BufferGeometry();
 const dustCount = 180;
@@ -261,6 +306,7 @@ function updateSceneFromTime(seconds) {
     activeSceneIndex = index;
     const preset = shotPresets[index % shotPresets.length];
     environments.forEach((environment, sceneIndex) => { environment.visible = sceneIndex === index % environments.length; });
+    titleCards.forEach((card, cardIndex) => { card.visible = cardIndex === index % titleCards.length; });
     targetCamera.set(...preset.camera);
     targetLook.set(...preset.look);
     targetRotation = preset.rotation;
@@ -418,6 +464,11 @@ renderer.setAnimationLoop(() => {
     artifact.rotation.y = Math.sin(elapsed * .18) * .018 + (sceneIndex === 3 ? p * .22 : sceneIndex === 4 ? -p * .12 : 0);
     artifact.rotation.z = sceneIndex === 1 ? Math.sin(shotPhase) * .025 : 0;
     const env = environments[activeSceneIndex % environments.length];
+    const titleCard = titleCards[activeSceneIndex % titleCards.length];
+    if (titleCard) {
+      titleCard.position.y = 2.65 + Math.sin(elapsed * .55) * .018;
+      titleCard.material.opacity = .88 + Math.sin(elapsed * .7) * .035;
+    }
     if (env) {
       env.userData.strip.position.y = 1.5 + Math.sin(elapsed * .5) * .12;
       env.userData.glow.intensity = 8 + Math.sin(elapsed * .7) * 1.1;
