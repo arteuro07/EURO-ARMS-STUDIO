@@ -1,27 +1,36 @@
-// Synchronisation narration / scènes à partir des timecodes audio réels.
-export function buildSceneTimeline(scriptSegments, audioDuration) {
-  if (!Array.isArray(scriptSegments) || !scriptSegments.length) throw new Error("Aucun segment narratif");
-  if (!(audioDuration > 0)) throw new Error("Durée audio invalide");
-  const totalWeight = scriptSegments.reduce((n, s) => n + Math.max(1, s.words || 1), 0);
-  let cursor = 0;
-  return scriptSegments.map((segment, index) => {
-    const duration = audioDuration * Math.max(1, segment.words || 1) / totalWeight;
-    const scene = {
-      id: segment.id || `scene-${String(index + 1).padStart(2, "0")}`,
-      start: cursor,
-      end: cursor + duration,
-      narration: segment.text,
-      visualPrompt: segment.visualPrompt,
-      motion: segment.motion || "slow-camera-dolly"
-    };
-    cursor += duration;
-    return scene;
-  });
+// Lecture et pilotage de la timeline produite à partir des WAV Piper réels.
+export function validateAudioTimeline(data) {
+  if (!data || !Array.isArray(data.segments) || data.segments.length === 0) {
+    throw new Error("Timeline audio invalide : aucun segment.");
+  }
+  let previousEnd = 0;
+  for (const segment of data.segments) {
+    if (!Number.isFinite(segment.start) || !Number.isFinite(segment.end) ||
+        segment.start < 0 || segment.end <= segment.start) {
+      throw new Error(`Timecodes invalides pour ${segment.id || "scène"}.`);
+    }
+    if (segment.start + 0.001 < previousEnd) {
+      throw new Error("Les scènes se chevauchent dans la timeline.");
+    }
+    previousEnd = segment.end;
+  }
+  return data.segments;
 }
 
 export function sceneAtTime(timeline, seconds) {
-  return timeline.find(s => seconds >= s.start && seconds < s.end) || timeline.at(-1) || null;
+  if (!Array.isArray(timeline) || timeline.length === 0) return null;
+  return timeline.find((scene, index) =>
+    seconds >= scene.start &&
+    (seconds < scene.end || index === timeline.length - 1 && seconds <= scene.end)
+  ) || (seconds < timeline[0].start ? timeline[0] : timeline[timeline.length - 1]);
 }
 
-// Les timecodes finaux devront provenir d'un aligner audio/texte (forced alignment),
-// pas seulement de cette estimation pondérée par nombre de mots.
+export function sceneProgress(scene, seconds) {
+  if (!scene) return 0;
+  return Math.max(0, Math.min(1, (seconds - scene.start) / (scene.end - scene.start)));
+}
+
+export function smoothstep(value) {
+  const t = Math.max(0, Math.min(1, value));
+  return t * t * (3 - 2 * t);
+}
