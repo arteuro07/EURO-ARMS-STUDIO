@@ -240,6 +240,7 @@ const shotPresets = [
   { camera: [0.0, 2.8, 7.2], look: [0, .8, 0], rotation: Math.PI * 2, scale: .94 }
 ];
 let activeSceneIndex = -1;
+let activeCue = null;
 let audioTimeline = null;
 let audioUrl = null;
 let timelineReady = false;
@@ -255,6 +256,7 @@ function updateSceneFromTime(seconds) {
   const cue = sceneAtTime(audioTimeline, seconds);
   if (!cue) return;
   const index = audioTimeline.indexOf(cue);
+  activeCue = cue;
   if (index !== activeSceneIndex) {
     activeSceneIndex = index;
     const preset = shotPresets[index % shotPresets.length];
@@ -390,15 +392,31 @@ renderer.setAnimationLoop(() => {
     targetRotation = targetRotY;
   }
 
-  camera.position.lerp(targetCamera, damping);
-  cameraTarget.lerp(targetLook, damping);
+  const p = audioReady && audioTimeline ? (artifact.userData.sceneProgress || 0) : 0;
+  const shotIndex = Math.max(0, activeSceneIndex);
+  const shotPhase = p * Math.PI;
+  const cameraDrift = new THREE.Vector3(
+    Math.sin(shotPhase) * (shotIndex === 4 ? .34 : .16),
+    Math.sin(shotPhase * 2) * .07,
+    Math.cos(shotPhase) * (shotIndex === 5 ? .42 : -.12)
+  );
+  const cameraDesired = targetCamera.clone().add(cameraDrift);
+  camera.position.lerp(cameraDesired, damping);
+  const lookDrift = new THREE.Vector3(Math.sin(shotPhase) * .08, Math.sin(shotPhase) * .035, 0);
+  cameraTarget.lerp(targetLook.clone().add(lookDrift), damping);
   camera.lookAt(cameraTarget);
 
   if (audioReady && audioTimeline) {
     pedestal.rotation.y += (targetRotation - pedestal.rotation.y) * damping;
-    const p = artifact.userData.sceneProgress || 0;
-    artifact.rotation.x = Math.sin(elapsed * .32) * .025 + p * .06;
-    artifact.rotation.y = Math.sin(elapsed * .22) * .035;
+    const sceneIndex = Math.max(0, activeSceneIndex);
+    artifact.position.set(
+      Math.sin(shotPhase) * (sceneIndex === 1 ? .14 : .045),
+      1.55 + (sceneIndex === 0 ? -.34 * (1 - smoothstep(p)) : Math.sin(shotPhase) * .045),
+      0
+    );
+    artifact.rotation.x = Math.sin(elapsed * .32) * .018 + (sceneIndex === 2 ? Math.sin(shotPhase) * .045 : 0);
+    artifact.rotation.y = Math.sin(elapsed * .18) * .018 + (sceneIndex === 3 ? p * .22 : sceneIndex === 4 ? -p * .12 : 0);
+    artifact.rotation.z = sceneIndex === 1 ? Math.sin(shotPhase) * .025 : 0;
     const env = environments[activeSceneIndex % environments.length];
     if (env) {
       env.userData.strip.position.y = 1.5 + Math.sin(elapsed * .5) * .12;
@@ -409,7 +427,8 @@ renderer.setAnimationLoop(() => {
         prop.position.y = Math.sin(elapsed * .48 + activeSceneIndex) * .035;
       }
     }
-    artifact.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), damping);
+    const sceneScale = targetScale * (sceneIndex === 4 ? 1 + Math.sin(shotPhase) * .035 : sceneIndex === 5 ? 1 - p * .055 : 1);
+    artifact.scale.lerp(new THREE.Vector3(sceneScale, sceneScale, sceneScale), damping);
   } else {
     pedestal.rotation.y += (targetRotation - pedestal.rotation.y) * damping;
     artifact.rotation.x = currentRotX + Math.sin(elapsed * .45) * .025;
