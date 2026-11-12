@@ -24,7 +24,7 @@ jobs:
       - name: Récupérer le code de la version narrée
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          ref: main
 
       - name: Installer Node.js
         uses: actions/setup-node@v4
