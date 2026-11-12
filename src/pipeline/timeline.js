@@ -19,10 +19,19 @@ export function validateAudioTimeline(data) {
 
 export function sceneAtTime(timeline, seconds) {
   if (!Array.isArray(timeline) || timeline.length === 0) return null;
-  return timeline.find((scene, index) =>
+  const active = timeline.find((scene, index) =>
     seconds >= scene.start &&
     (seconds < scene.end || index === timeline.length - 1 && seconds <= scene.end)
-  ) || (seconds < timeline[0].start ? timeline[0] : timeline[timeline.length - 1]);
+  );
+  if (active) return active;
+  if (seconds < timeline[0].start) return timeline[0];
+  // Pendant les 120 ms de silence entre deux WAV, conserver le plan précédent.
+  for (let index = timeline.length - 2; index >= 0; index--) {
+    if (seconds >= timeline[index].end && seconds < timeline[index + 1].start) {
+      return timeline[index];
+    }
+  }
+  return timeline[timeline.length - 1];
 }
 
 export function sceneProgress(scene, seconds) {
