@@ -1,10 +1,12 @@
 import json
-import subprocess
 import wave
 from pathlib import Path
 
+from piper import PiperVoice, SynthesisConfig
+
 EPISODE = Path("episodes/001-desert-eagle/episode.json")
 MODEL_DIR = Path(".voice-cache")
+MODEL_PATH = MODEL_DIR / "fr_FR-mls-medium.onnx"
 OUT = Path("dist/episode-001")
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -15,32 +17,27 @@ if episode.get("voiceProfile") != "euro-documentary-fr-01":
 segments = episode.get("segments", [])
 if not segments:
     raise SystemExit("L'épisode ne contient aucun segment.")
+if not MODEL_PATH.exists():
+    raise SystemExit(f"Modèle vocal introuvable : {MODEL_PATH}")
 
-# Une seule instance Piper charge le modèle une fois, puis écrit chaque WAV
-# demandé par les lignes JSON. Le speaker_id reste explicitement fixé à 0.
-requests = []
+# Charger le modèle une seule fois, puis générer un WAV distinct par scène.
+# Piper 1.8.x expose cette API Python ; son CLI actuel n'accepte pas --json-input.
+print("Chargement de Piper MLS, locuteur 0…")
+voice = PiperVoice.load(MODEL_PATH, download_dir=MODEL_DIR)
+synthesis = SynthesisConfig(speaker_id=0)
 wav_parts = []
+
 for index, segment in enumerate(segments, start=1):
     text = segment["text"].strip()
     if not text:
         raise SystemExit(f"Texte vide pour {segment.get('id', index)}")
     output = OUT / f"{index:02d}-{segment['id']}.wav"
-    requests.append({
-        "text": text,
-        "speaker_id": 0,
-        "output_file": str(output)
-    })
+    print(f"Génération {index}/{len(segments)} : {segment['id']}")
+    with wave.open(str(output), "wb") as wav_file:
+        voice.synthesize_wav(text, wav_file, synthesis)
+    if not output.exists() or output.stat().st_size < 1000:
+        raise SystemExit(f"Fichier audio absent ou trop petit : {output}")
     wav_parts.append((segment, output))
-
-payload = "".join(json.dumps(item, ensure_ascii=False) + "\n" for item in requests)
-command = [
-    "python", "-m", "piper",
-    "-m", "fr_FR-mls-medium",
-    "--data-dir", str(MODEL_DIR),
-    "--json-input"
-]
-print(f"Génération de {len(requests)} passages avec Piper MLS, locuteur 0…")
-subprocess.run(command, input=payload, text=True, check=True)
 
 # La timeline est calculée à partir des durées PCM réellement écrites.
 timeline = []
