@@ -1,0 +1,82 @@
+name: EURO TTS — audition des voix françaises
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer Piper TTS
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install piper-tts
+
+      - name: Télécharger les modèles de test
+        run: |
+          mkdir -p .voice-cache dist/voice-audition
+          python -m piper.download_voices fr_FR-tom-medium --data-dir .voice-cache
+          python -m piper.download_voices fr_FR-gilles-low --data-dir .voice-cache
+          python -m piper.download_voices fr_FR-mls-medium --data-dir .voice-cache
+
+      - name: Générer trois échantillons avec le même texte
+        run: |
+          TEXT="Sur Free Fire, le Desert Eagle est devenu une arme emblématique. Mais son histoire commence bien avant le jeu. À la fin des années mille neuf cent soixante-dix, Magnum Research imagine un pistolet semi-automatique hors norme. En mille neuf cent quatre-vingt-trois, le modèle en calibre trois cent cinquante-sept Magnum arrive sur le marché. Puis, dans les années mille neuf cent quatre-vingt-dix, la version cinquante Action Express renforce sa réputation. Voici l'histoire réelle derrière l'icône."
+          python -m piper -m fr_FR-tom-medium --data-dir .voice-cache -f dist/voice-audition/tom-medium.wav -- "$TEXT"
+          python -m piper -m fr_FR-gilles-low --data-dir .voice-cache -f dist/voice-audition/gilles-low.wav -- "$TEXT"
+          python -m piper -m fr_FR-mls-medium --data-dir .voice-cache --speaker 0 -f dist/voice-audition/mls-speaker-0.wav -- "$TEXT"
+
+      - name: Ajouter les informations de licence et d'écoute
+        run: |
+          cat > dist/voice-audition/README.txt <<'EOF'
+          EURO TTS — échantillons de comparaison uniquement
+          
+          Les trois fichiers lisent exactement le même texte.
+          
+          tom-medium.wav
+          Modèle fr_FR-tom-medium, 44,1 kHz, qualité medium.
+          Modèle et autorisation de voix documentés par son auteur sous AGPL-3.0 et conditions additionnelles.
+          Source : https://github.com/tjiho/French-tts-model-piper
+          
+          gilles-low.wav
+          Modèle fr_FR-gilles-low, 16 kHz, qualité low.
+          Dataset source indiqué CC0 dans la fiche du modèle.
+          Source : https://huggingface.co/rhasspy/piper-voices/tree/main/fr/fr_FR/gilles/low
+          
+          mls-speaker-0.wav
+          Modèle fr_FR-mls-medium, 22,05 kHz, 125 locuteurs annoncés.
+          Dataset MLS indiqué CC-BY-4.0 dans la fiche du modèle.
+          Le genre du locuteur 0 n'est pas présumé : vérifier à l'écoute.
+          Source : https://huggingface.co/rhasspy/piper-voices/tree/main/fr/fr_FR/mls/medium
+          
+          Ces échantillons ne désignent pas encore la voix officielle d'EURO TTS.
+          Ne pas redistribuer les poids des modèles à partir de cet artefact.
+          Moteur Piper : https://github.com/OHF-Voice/piper1-gpl
+          EOF
+
+      - name: Vérifier les fichiers audio
+        run: |
+          test -s dist/voice-audition/tom-medium.wav
+          test -s dist/voice-audition/gilles-low.wav
+          test -s dist/voice-audition/mls-speaker-0.wav
+          file dist/voice-audition/*.wav
+
+      - name: Publier les échantillons
+        uses: actions/upload-artifact@v4
+        with:
+          name: EURO-TTS-voice-audition
+          path: dist/voice-audition/
+          if-no-files-found: error
+          retention-days: 7
