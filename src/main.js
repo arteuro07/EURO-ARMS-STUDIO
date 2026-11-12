@@ -204,6 +204,68 @@ const makeEnvironment = (index) => {
     }
     group.userData.movingProp = props;
   }
+  // Mise en scène historique dédiée : accessoires d'époque, sans détail fonctionnel.
+  const addBox = (w,h,d,material,x,y,z,parent=props) => {
+    const mesh = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), material);
+    mesh.position.set(x,y,z); mesh.castShadow = true; mesh.receiveShadow = true;
+    parent.add(mesh); return mesh;
+  };
+  const addSheet = (w,h,material,x,y,z,rotationX=0) => {
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w,h), material);
+    mesh.position.set(x,y,z); mesh.rotation.x = rotationX; props.add(mesh); return mesh;
+  };
+  if (index === 0) {
+    // Plan de travail d'atelier : feuilles, grille de dessin et règle métallique.
+    const paper = new THREE.MeshStandardMaterial({color:'#b8b0a0', roughness:.96, side:THREE.DoubleSide});
+    addSheet(2.1,1.05,paper,0,.485,-1.82,-Math.PI/2);
+    for (let n=0;n<7;n++) {
+      const line = addBox(1.82,.006,.008,accent,-.08,.493,-2.25+n*.14);
+      line.rotation.y = 0;
+    }
+    addBox(1.55,.025,.07,frameMat,.95,.51,-1.62);
+    addBox(.09,.035,.62,accent,-1.02,.515,-1.8);
+  } else if (index === 1) {
+    // Archives papier : boîtes de classement et cadres de documents.
+    for (let n=0;n<3;n++) {
+      addBox(.72,.48,.52,muted,-1.45+n*1.4,.32,-2.65);
+      addBox(.66,.035,.48,accent,-1.45+n*1.4,.58,-2.65);
+      addBox(.035,.12,.018,frameMat,-1.45+n*1.4,.38,-2.37);
+    }
+    for (let n=0;n<5;n++) addBox(.44,.012,.012,frameMat,-1.35+(n%2)*.12,1.08+n*.12,-2.06);
+  } else if (index === 2) {
+    // Schéma de musée abstrait : cercles et repères, sans instructions d'assemblage.
+    const diagram = new THREE.Group(); props.add(diagram);
+    for (let n=0;n<4;n++) {
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(.22+n*.16,.009,6,64), frameMat);
+      ring.position.set(-1.35+n*.9,1.42,-2.35); diagram.add(ring);
+    }
+    addBox(3.35,.025,.035,accent,0,.82,-2.3);
+    group.userData.movingProp = diagram;
+  } else if (index === 3) {
+    // Vitrine de lancement : verre dépoli et montants de présentation.
+    const glass = new THREE.MeshStandardMaterial({color:'#a8b5bc',transparent:true,opacity:.16,roughness:.18,metalness:.12});
+    addBox(2.8,.035,.9,accent,0,.34,-2.0);
+    addBox(2.8,.035,.9,accent,0,2.35,-2.0);
+    for (const x of [-1.38,1.38]) addBox(.035,2.0,.82,glass,x,1.34,-2.0);
+    addBox(2.7,.025,.82,glass,0,1.34,-2.0);
+  } else if (index === 4) {
+    // Repères de chronologie de l'évolution du calibre, non balistiques.
+    for (let n=0;n<5;n++) {
+      const height=.48+n*.19;
+      addBox(.12,height,.12,accent,-1.25+n*.62,.52+height/2,-2.55);
+      const cap = new THREE.Mesh(new THREE.SphereGeometry(.075,16,12),frameMat);
+      cap.position.set(-1.25+n*.62,.55+height,-2.55); props.add(cap);
+    }
+    addBox(3.15,.035,.045,frameMat,0,.54,-2.5);
+  } else {
+    // Séparation visuelle entre objet historique et représentation vidéoludique.
+    const warm = new THREE.MeshStandardMaterial({color:'#75634d',roughness:.88});
+    const digital = new THREE.MeshStandardMaterial({color:'#29475a',roughness:.72,metalness:.2});
+    addBox(1.62,2.55,.09,warm,-1.02,1.65,-2.82);
+    addBox(1.62,2.55,.09,digital,1.02,1.65,-2.82);
+    const divider = addBox(.025,2.75,.035,accent,0,1.65,-2.72);
+    group.userData.movingProp = divider;
+  }
   group.userData.glow = glow;
   group.userData.strip = strip;
   group.visible = index === 0;
