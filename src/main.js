@@ -211,8 +211,6 @@ const makeEnvironment = (index) => {
 };
 for (let i = 0; i < 6; i++) makeEnvironment(i);
 
-for (let i = 0; i < 6; i++) makeEnvironment(i);
-
 // Cartouches éditoriaux dessinés en haute résolution : repères historiques
 // lisibles dans chaque plan, sans fausses inscriptions générées.
 const sceneTitles = [
