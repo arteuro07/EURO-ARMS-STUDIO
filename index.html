@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10151c" />
+    <meta name="description" content="EURO-ARMS-STUDIO — studio documentaire historique." />
+    <title>EURO-ARMS-STUDIO</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="#"><span class="brand-mark">EA</span><span>EURO<span class="muted"> / </span>ARMS STUDIO<small>HISTOIRE · IMAGE · CINÉMA</small></span></a>
+        <span class="status"><i></i> MOTEUR 3D ACTIF</span>
+      </header>
+      <main>
+        <section class="intro">
+          <p class="eyebrow">ATELIER DOCUMENTAIRE · 001</p>
+          <h1>Donner du relief<br><em>à l’Histoire.</em></h1>
+          <p class="lead">Un studio de création d’épisodes historiques, pensé comme un documentaire de cinéma.</p>
+        </section>
+        <section class="stage-wrap">
+          <div class="stage-heading"><span>APERÇU DE LA SCÈNE</span><span id="render-state">INITIALISATION…</span></div>
+          <div id="stage" aria-label="Scène 3D interactive"></div>
+          <div class="stage-caption"><span>ÉTUDE DE MATIÈRE · VOLUME 3D</span><span>FAITES GLISSER POUR ORBITER</span></div>
+        </section>
+        <section class="controls">
+          <div class="control-copy"><p class="eyebrow">ÉTALONNAGE VISUEL</p><h2>La lumière, avec mesure.</h2><p>Réglez l’image sans perdre les détails dans les ombres ni les hautes lumières.</p></div>
+          <div class="sliders">
+            <label>Luminosité <output id="brightness-value">100%</output><input id="brightness" type="range" min="70" max="130" value="100"></label>
+            <label>Contraste <output id="contrast-value">100%</output><input id="contrast" type="range" min="75" max="130" value="100"></label>
+            <label>Saturation <output id="saturation-value">100%</output><input id="saturation" type="range" min="60" max="125" value="100"></label>
+            <button id="reset" type="button">RÉINITIALISER L’ÉTALONNAGE</button>
+          </div>
+        </section>
+        <footer><span>EURO-ARMS-STUDIO</span><span>PROTOTYPE MOTEUR · V0.1.0</span></footer>
+      </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
