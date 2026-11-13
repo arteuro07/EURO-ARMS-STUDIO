@@ -1,7 +1,7 @@
 # L’HISTOIRE DES ARMES — Épisode 001
 ## Desert Eagle : une légende venue du réel
 
-**Durée cible :** 57 secondes  
+**Durée cible :** 58 secondes (audio mesuré : 57,90 secondes)  
 **Formats :** TikTok, YouTube Shorts, Reels — vertical 9:16, 1080 × 1920, 30 i/s  
 **Direction visuelle :** illustration documentaire 2D avec profondeur 2.5D, fond olive mat, papier ivoire, accents jaune archive, grain discret et lumière contrôlée.  
 **Voix :** Piper, modèle français MLS, locuteur 0 (speaker 1840), voix masculine cataloguée, retenue lors de l'audition précédente. Même profil pour chaque épisode ; aucun enregistrement personnel. Le dataset est sous CC BY 4.0 : conserver l'attribution jointe à l'audio.
@@ -31,42 +31,42 @@ Les dates de conception, brevet, prototypes et commercialisation sont corroboré
 
 ## 4. Découpage des scènes
 
-### Scène 1 — 00:00 à 00:06,9 — L'accroche
+### Scène 1 — 00:00 à 00:04,48 — L'accroche
 **Voix :** « Sur Free Fire, tu utilises cette arme sans connaître son histoire… je vais te la raconter. »  
 **Illustration :** silhouette documentaire du Desert Eagle en grand cutout, sur fond olive mat, couches de papier ivoire et une ligne jaune archive.  
 **Prompt visuel :**  
 > Vertical 9:16 editorial documentary illustration, a historically plausible Desert Eagle Mark I silhouette as a large isolated cutout, dramatic but restrained, matte olive green background, warm off-white paper shapes, one muted archive-yellow accent, fine ink contours, subtle paper grain, layered 2.5D depth, no text, no logo, no people, no firing, no muzzle flash, no gore.  
 **Animation :** le cutout entre par le bas ; les couches papier glissent à des vitesses différentes ; une ligne jaune se dessine. Pas de simple zoom.
 
-### Scène 2 — 00:06,9 à 00:13,3 — L'idée américaine
+### Scène 2 — 00:04,60 à 00:11,76 — L'idée américaine
 **Voix :** « Fin des années 1970 : l’américaine Magnum Research imagine un semi-automatique conçu pour les cartouches magnum. »  
 **Illustration :** bureau de conception de la fin des années 1970, croquis sur papier calque, outils de dessin d'époque et mains anonymes.  
 **Prompt visuel :**  
 > Vertical 9:16 late-1970s American industrial design office, an anonymous engineer's hands arranging period-correct paper sketches and drafting tools on a desk, a restrained silhouette study of a large semi-automatic pistol on tracing paper, matte olive green and warm off-white editorial cutout illustration, muted archive-yellow details, cinematic side lighting, fine ink linework, paper grain, layered 2.5D composition, no readable text, no logos, no weapon handling, no firing.  
 **Animation :** feuilles en parallaxe, tracé de crayon animé, cartouche de date « 1979 » ajouté au montage.
 
-### Scène 3 — 00:13,3 à 00:22,3 — Brevet et collaboration
+### Scène 3 — 00:11,88 à 00:22,28 — Brevet et collaboration
 **Voix :** « Le dessin est breveté en 1980 ; des prototypes suivent en 1981. IMI, en Israël, intervient comme sous-traitant pour finaliser le modèle. »  
 **Illustration :** document de brevet, silhouette de prototype et carte schématique reliant les États-Unis à Israël.  
 **Prompt visuel :**  
 > Vertical 9:16 historical editorial illustration showing a 1980 patent document and a 1981 early prototype silhouette on an archival workbench, a subtle simplified map connection between the United States and Israel to indicate an industrial subcontracting partnership, matte olive green, warm off-white, restrained archive yellow, fine technical ink drawing, cinematic documentary light, layered paper cutouts and 2.5D depth, no legible fake writing, no flags, no logos, no assembly instructions, no firing.  
 **Animation :** feuille de brevet en rotation légère ; masque révélant le prototype ; ligne de liaison qui se dessine sur la carte.
 
-### Scène 4 — 00:22,3 à 00:32,2 — Les premiers calibres
+### Scène 4 — 00:22,40 à 00:33,39 — Les premiers calibres
 **Voix :** « Fin 1983, le Mark I en .357 Magnum arrive sur le marché. En 1986, le Desert Eagle est aussi proposé en .44 Magnum. »  
 **Illustration :** silhouette du Mark I, sans rail supérieur moderne, puis transition vers la version .44 Magnum.  
 **Prompt visuel :**  
 > Vertical 9:16 museum-archive editorial cutout illustration of the early Desert Eagle Mark I, historically plausible 1983 profile with no later top accessory rail, presented as a neutral artefact beside a second archival silhouette representing the 1986 .44 Magnum version, matte olive background, warm off-white date cards, restrained archive-yellow accents, crisp ink contours, soft cinematic side light, subtle paper grain, no ammunition, no people, no text, no logos, no firing.  
 **Animation :** carte « 1983 » qui se verrouille ; le cutout du Mark I avance légèrement ; carte « 1986 » et match cut vers la seconde silhouette.
 
-### Scène 5 — 00:32,2 à 00:42,5 — Le .50 AE et la culture populaire
+### Scène 5 — 00:33,51 à 00:43,36 — Le .50 AE et la culture populaire
 **Voix :** « Au milieu des années 1990, le Mark XIX adopte le .50 Action Express. Sa silhouette devient célèbre au cinéma et dans les jeux vidéo. »  
 **Illustration :** Mark XIX en cutout, avec collage de cadres de cinéma et d'écrans de jeux abstraits, sans logos ni personnages copiés.  
 **Prompt visuel :**  
 > Vertical 9:16 1990s editorial documentary illustration of a Desert Eagle Mark XIX as a large isolated archival cutout, with a restrained collage of abstract cinema frames and vintage video-game screen shapes in the background, matte olive green, warm off-white and muted archive yellow, controlled highlights, ink contours, paper grain, layered 2.5D depth, no copyrighted characters, no recognizable film posters, no game logos, no firing, no people.  
 **Animation :** balayage de timeline vers le milieu des années 1990 ; le Mark XIX glisse au premier plan ; les cadres de cinéma et de jeu se déplacent derrière lui.
 
-### Scène 6 — 00:42,5 à 00:56,7 — Réel contre jeu, teaser suivant
+### Scène 6 — 00:43,48 à 00:57,90 — Réel contre jeu, teaser suivant
 **Voix :** « Dans Free Fire, tu vois sa version virtuelle. Dans la réalité, c’est un projet américain dont la fabrication initiale est confiée à IMI. Prochain épisode : la MP40, née pendant la Seconde Guerre mondiale. »  
 **Illustration :** séparation claire entre l'artefact historique et une silhouette vidéoludique abstraite ; petite silhouette MP40 en teaser final.  
 **Prompt visuel :**  
@@ -98,4 +98,4 @@ Les dates de conception, brevet, prototypes et commercialisation sont corroboré
 
 ## État de production
 
-Le workflow Piper a généré six segments WAV, un WAV complet et une timeline mesurée ; les contrôles automatiques de durée et de continuité ont réussi. Le profil fixe est le locuteur MLS 0 (speaker 1840), une voix masculine française cataloguée. La voix n'est pas clonée à partir d'un enregistrement personnel. L'attribution CC BY 4.0 est jointe aux livrables. Les timecodes finaux sont ceux du fichier timeline.json produit par le workflow, pas les estimations de ce document.
+Le workflow Piper a généré six segments WAV, un WAV complet de 57,90 secondes et une timeline mesurée ; les contrôles automatiques de durée et de continuité ont réussi. Les scènes démarrent aux timecodes réels : 00:00, 00:04,60, 00:11,88, 00:22,40, 00:33,51 et 00:43,48. Des séparateurs silencieux de 0,12 seconde sont insérés entre les segments. Le profil fixe est le locuteur MLS 0 (speaker 1840), une voix masculine française cataloguée. La voix n'est pas clonée à partir d'un enregistrement personnel. L'attribution CC BY 4.0 est jointe aux livrables. Les timecodes finaux sont ceux du fichier timeline.json produit par le workflow, pas les estimations de ce document.
