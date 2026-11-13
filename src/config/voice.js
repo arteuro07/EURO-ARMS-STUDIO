@@ -7,8 +7,10 @@ export const VOICE_PROFILE = Object.freeze({
   model: "fr_FR-mls-medium",
   language: "french",
   speakerId: 0,
+  datasetSpeakerId: "1840",
+  gender: "male",
   voiceReference: null,
-  voiceReferenceStatus: "USER_APPROVED_AUDIO_AUDITION",
+  voiceReferenceStatus: "USER_APPROVED_PIPER_AUDITION",
   direction: "voix française retenue à l'écoute, narration documentaire posée et chaleureuse",
   generation: Object.freeze({
     format: "wav",
