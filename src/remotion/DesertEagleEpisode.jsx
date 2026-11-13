@@ -43,7 +43,8 @@ const CalibreArt=()=> <div style={{display:"flex",alignItems:"center",gap:28}}><
 
 function Art({kind,progress}) {
   const entrance=spring({frame:Math.max(0,progress*42),fps:30,config:{damping:15,stiffness:90}});
-  const floatY=Math.sin(progress*Math.PI*2)*13; const floatX=Math.cos(progress*Math.PI*2)*7;\n  const common={position:"absolute",left:0,right:0,top:"31%",display:"flex",justifyContent:"center",alignItems:"center",transform:`translate(${floatX}px,${interpolate(entrance,[0,1],[90,0])+floatY}px) scale(${interpolate(entrance,[0,1],[.82,1])})`,opacity:entrance};
+  const floatY=Math.sin(progress*Math.PI*2)*13; const floatX=Math.cos(progress*Math.PI*2)*7;
+  const common={position:"absolute",left:0,right:0,top:"31%",display:"flex",justifyContent:"center",alignItems:"center",transform:`translate(${floatX}px,${interpolate(entrance,[0,1],[90,0])+floatY}px) scale(${interpolate(entrance,[0,1],[.82,1])})`,opacity:entrance};
   if(kind==="hero"||kind==="final") return <div style={{...common,top:"32%"}}><GunIllustration scale={kind==="final"?.76:.88} progress={progress}/></div>;
   if(kind==="archive") return <div style={{...common,top:"25%"}}><ArchiveArt progress={progress}/></div>;
   if(kind==="diagram") return <div style={{...common,top:"26%"}}><DiagramArt progress={progress}/></div>;
