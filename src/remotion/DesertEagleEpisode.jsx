@@ -11,7 +11,7 @@ const scenes = [
 ];
 
 const gold="#f3c943", cream="#f2f0e4", muted="#d2d5c4";
-const GunIllustration=({scale=1})=> <svg width="900" height="430" viewBox="0 0 900 430" style={{overflow:"visible",transform:`scale(${scale})`}}>
+const GunIllustration=({scale=1,progress=0})=> <svg width="900" height="430" viewBox="0 0 900 430" style={{overflow:"visible",transform:`translateX(${Math.sin(progress*Math.PI*2)*10}px) scale(${scale*(1+Math.sin(progress*Math.PI*2)*.012)})`,transformOrigin:"center"}}>
   <defs><linearGradient id="steel" x2="0" y2="1"><stop stopColor="#e0e0d3"/><stop offset=".38" stopColor="#8d948c"/><stop offset="1" stopColor="#3c453f"/></linearGradient><filter id="shadow"><feGaussianBlur stdDeviation="12"/></filter></defs>
   <ellipse cx="450" cy="335" rx="390" ry="28" fill="#172018" opacity=".34" filter="url(#shadow)"/>
   <g stroke="#252d27" strokeWidth="15" strokeLinejoin="round" strokeLinecap="round">
@@ -27,12 +27,12 @@ const GunIllustration=({scale=1})=> <svg width="900" height="430" viewBox="0 0 9
   <path d="M805 166 L865 166" stroke="#e0e0d3" strokeWidth="15" strokeLinecap="round"/>
 </svg>;
 
-const ArchiveArt=()=> <svg width="760" height="700" viewBox="0 0 760 700">
+const ArchiveArt=({progress=0})=> <svg width="760" height="700" viewBox="0 0 760 700" style={{transform:`translateY(${Math.sin(progress*Math.PI*2)*10}px) rotate(${Math.sin(progress*Math.PI*2)*.7}deg)`}}>
   <g transform="rotate(-7 360 350)"><rect x="100" y="80" width="520" height="550" rx="8" fill="#d8d0b5" stroke="#f1e8ce" strokeWidth="8"/><rect x="140" y="125" width="440" height="42" fill="#a69d81"/><path d="M160 230 H550 M160 270 H520 M160 310 H545 M160 350 H490 M160 440 H550 M160 480 H515" stroke="#7e806e" strokeWidth="7" opacity=".55"/><rect x="165" y="385" width="235" height="32" fill="#8d8d78"/><path d="M170 540 L520 540" stroke="#8d8d78" strokeWidth="5"/></g>
   <g fill="none" stroke={gold} strokeWidth="8"><circle cx="565" cy="160" r="75"/><path d="M565 45 V275 M450 160 H680"/></g>
 </svg>;
 
-const DiagramArt=()=> <svg width="760" height="650" viewBox="0 0 760 650" fill="none">
+const DiagramArt=({progress=0})=> <svg width="760" height="650" viewBox="0 0 760 650" fill="none" style={{transform:`rotate(${Math.sin(progress*Math.PI*2)*2.2}deg) scale(${1+Math.sin(progress*Math.PI*2)*.012})`}}>
   <g stroke="#e7e5d7" strokeWidth="13" opacity=".9"><circle cx="330" cy="300" r="190"/><circle cx="330" cy="300" r="128"/><circle cx="330" cy="300" r="64"/><path d="M330 75 V525 M105 300 H555"/></g>
   <g stroke={gold} strokeWidth="12"><path d="M330 110 L520 300 L330 490 L140 300 Z"/><circle cx="330" cy="300" r="24" fill={gold}/></g>
   <g fill={cream} fontSize="28" fontFamily="monospace"><text x="565" y="190">PRINCIPE</text><text x="565" y="230">ILLUSTRÉ</text></g>
@@ -43,10 +43,10 @@ const CalibreArt=()=> <div style={{display:"flex",alignItems:"center",gap:28}}><
 
 function Art({kind,progress}) {
   const entrance=spring({frame:Math.max(0,progress*42),fps:30,config:{damping:15,stiffness:90}});
-  const common={position:"absolute",left:0,right:0,top:"31%",display:"flex",justifyContent:"center",alignItems:"center",transform:`translateY(${interpolate(entrance,[0,1],[90,0])}px) scale(${interpolate(entrance,[0,1],[.82,1])})`,opacity:entrance};
-  if(kind==="hero"||kind==="final") return <div style={{...common,top:"32%"}}><GunIllustration scale={kind==="final"?.76:.88}/></div>;
-  if(kind==="archive") return <div style={{...common,top:"25%"}}><ArchiveArt/></div>;
-  if(kind==="diagram") return <div style={{...common,top:"26%"}}><DiagramArt/></div>;
+  const floatY=Math.sin(progress*Math.PI*2)*13; const floatX=Math.cos(progress*Math.PI*2)*7;\n  const common={position:"absolute",left:0,right:0,top:"31%",display:"flex",justifyContent:"center",alignItems:"center",transform:`translate(${floatX}px,${interpolate(entrance,[0,1],[90,0])+floatY}px) scale(${interpolate(entrance,[0,1],[.82,1])})`,opacity:entrance};
+  if(kind==="hero"||kind==="final") return <div style={{...common,top:"32%"}}><GunIllustration scale={kind==="final"?.76:.88} progress={progress}/></div>;
+  if(kind==="archive") return <div style={{...common,top:"25%"}}><ArchiveArt progress={progress}/></div>;
+  if(kind==="diagram") return <div style={{...common,top:"26%"}}><DiagramArt progress={progress}/></div>;
   if(kind==="year") return <div style={{...common,top:"39%"}}><YearArt/></div>;
   return <div style={{...common,top:"39%"}}><CalibreArt/></div>;
 }
