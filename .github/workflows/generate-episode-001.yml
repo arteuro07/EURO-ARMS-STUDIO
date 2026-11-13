@@ -11,6 +11,7 @@ on:
       - "episodes/001-desert-eagle/episode.json"
       - ".github/workflows/generate-episode-001.yml"
       - "scripts/generate_episode_audio.py"
+      - "src/remotion/**"
 
 permissions:
   contents: read
