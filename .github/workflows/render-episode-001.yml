@@ -19,9 +19,9 @@ jobs:
   render:
     if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
-      - name: Récupérer le code de la version narrée
+      - name: Récupérer le code du studio
         uses: actions/checkout@v4
         with:
           ref: main
@@ -30,17 +30,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: npm
 
-      - name: Installer les dépendances du studio
-        run: |
-          npm install
-          npm install --no-save playwright
+      - name: Installer les dépendances
+        run: npm install
 
-      - name: Installer Chromium et les outils vidéo
+      - name: Installer FFmpeg
         run: |
-          npx playwright install --with-deps chromium
           sudo apt-get update
-          sudo apt-get install -y ffmpeg xvfb
+          sudo apt-get install -y ffmpeg
 
       - name: Télécharger la narration validée
         uses: actions/download-artifact@v4
@@ -50,43 +48,49 @@ jobs:
           run-id: ${{ github.event.workflow_run.id || inputs.narration_run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Vérifier le serveur et capturer les scènes 3D
+      - name: Préparer les données de rendu
         run: |
           test -s dist/episode-001/narration-complete.wav
           test -s dist/episode-001/timeline.json
-          xvfb-run -a -s "-screen 0 720x1280x24" bash -c '
-            set -e
-            npm run dev -- --host 127.0.0.1 --port 4173 > /tmp/euro-vite.log 2>&1 &
-            SERVER_PID=$!
-            trap "kill $SERVER_PID 2>/dev/null || true" EXIT
-            for attempt in $(seq 1 60); do
-              if curl -fsS http://127.0.0.1:4173/ >/dev/null; then break; fi
-              sleep 1
-            done
-            curl -fsS http://127.0.0.1:4173/ >/dev/null
-            node scripts/render_episode_001.mjs
-          '
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("dist/episode-001/timeline.json")
+          data = json.loads(p.read_text(encoding="utf-8"))
+          assert len(data["segments"]) == 6, "Il faut exactement six scènes"
+          assert data["duration"] > 1
+          assert all(s["end"] > s["start"] for s in data["segments"])
+          Path("dist/episode-001/remotion-props.json").write_text(
+              json.dumps({"timeline": data}, ensure_ascii=False), encoding="utf-8"
+          )
+          print(f"Timeline validée : {data['duration']:.2f}s / {len(data['segments'])} scènes")
+          PY
 
-      - name: Assembler le MP4 vertical avec la narration
-        shell: bash
+      - name: Rendre les scènes motion design en 1080x1920
+        run: |
+          npx remotion render src/remotion/index.jsx DesertEagle \
+            dist/episode-001/scene-capture.mp4 \
+            --props=dist/episode-001/remotion-props.json \
+            --codec=h264 --crf=18 --pixel-format=yuv420p \
+            --concurrency=2 --log=error
+
+      - name: Assembler la narration et vérifier le MP4
         run: |
           set -euo pipefail
           DURATION=$(python -c "import json; print(json.load(open('dist/episode-001/timeline.json'))['duration'])")
-          ffmpeg -y -ss 0.45 -i dist/episode-001/scene-capture.mp4 \
+          ffmpeg -y -i dist/episode-001/scene-capture.mp4 \
             -i dist/episode-001/narration-complete.wav -t "$DURATION" \
-            -map 0:v:0 -map 1:a:0 \
-            -vf "scale=1080:1920:flags=lanczos,setsar=1" -r 30 \
-            -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p \
+            -map 0:v:0 -map 1:a:0 -c:v copy \
             -c:a aac -b:a 192k -shortest -movflags +faststart \
             dist/episode-001/EURO-ARMS-EP001-DESERT-EAGLE.mp4
           test -s dist/episode-001/EURO-ARMS-EP001-DESERT-EAGLE.mp4
           ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 dist/episode-001/EURO-ARMS-EP001-DESERT-EAGLE.mp4 | grep -qx '1080x1920'
           ffprobe -v error -show_entries format=duration -of csv=p=0 dist/episode-001/EURO-ARMS-EP001-DESERT-EAGLE.mp4
 
-      - name: Publier le MP4
+      - name: Publier le MP4 motion design
         uses: actions/upload-artifact@v4
         with:
-          name: EURO-ARMS-EP001-DESERT-EAGLE-MP4
+          name: EURO-ARMS-EP001-DESERT-EAGLE-MOTION-DESIGN
           path: |
             dist/episode-001/EURO-ARMS-EP001-DESERT-EAGLE.mp4
             dist/episode-001/ATTRIBUTION.txt
