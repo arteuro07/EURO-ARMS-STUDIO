@@ -9,9 +9,11 @@
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
-    "three": "^0.180.0"
+    "three": "^0.180.0",
+    "remotion": "^4.0.0"
   },
   "devDependencies": {
-    "vite": "^6.4.1"
+    "vite": "^6.4.1",
+    "@remotion/cli": "^4.0.0"
   }
 }
