@@ -1,120 +1,146 @@
 {
   "id": "001",
-  "title": "Desert Eagle : une légende venue du réel",
+  "title": "Desert Eagle : la vraie histoire derrière l'icône",
   "series": "L’HISTOIRE DES ARMES",
   "weapon": "Desert Eagle",
+  "platformReference": "Garena Free Fire",
   "language": "fr-FR",
-  "targetSeconds": 55,
-  "targetAspectRatio": "9:16",
-  "targetResolution": "1080x1920",
-  "targetFrameRate": 30,
+  "format": "9:16",
+  "resolution": "1080x1920",
+  "targetSeconds": 58,
   "voiceProfile": "euro-documentary-fr-01",
-  "voiceStatus": "Fixed Piper French MLS voice: speaker_id 0 (dataset speaker 1840), catalogued as male; approved in the prior voice audition. No user recording is used.",
-  "narration": "Sur Free Fire, tu utilises cette arme sans connaître son histoire… je vais te la raconter. Fin des années 1970, Magnum Research imagine un pistolet semi-automatique pour cartouches magnum. Le dessin est breveté en 1980 ; les premiers prototypes suivent en 1981. IMI, en Israël, intervient comme sous-traitant. Fin 1983, le Mark I en .357 Magnum arrive. En 1986, le .44 Magnum rejoint la gamme. Au milieu des années 1990, le Mark XIX reçoit le .50 Action Express et s’impose au cinéma comme dans les jeux vidéo. Dans Free Fire, tu vois sa version virtuelle. Dans la réalité, sa fabrication initiale est confiée à IMI. Prochain épisode : la MP40, née pendant la Seconde Guerre mondiale.",
-  "timingBasis": "Final scene boundaries are generated from the measured WAV duration of each segment; no manual word-count timecodes are used in the renderer.",
-  "visualStyle": {
-    "look": "2D illustrated documentary motion design with restrained 2.5D depth",
+  "narrationDirection": "Voix masculine synthétique originale, grave mais naturelle, posée, chaleureuse, articulation nette. Réutiliser strictement la même référence et les mêmes paramètres sur chaque épisode.",
+  "visualIdentity": {
+    "look": "documentaire historique cinématographique, réalisme stylisé détaillé",
     "palette": [
-      "matte olive green",
-      "warm off-white",
-      "restrained archive yellow"
+      "bleu ardoise",
+      "acier neutre",
+      "bronze chaud discret"
     ],
-    "background": "clean matte olive field with subtle paper grain and soft vignette",
-    "illustration": "large isolated editorial cutout illustrations, simple explanatory diagrams and restrained infographic elements",
-    "typography": "bold uppercase editorial titles; short white narration captions with one highlighted yellow key phrase",
-    "animation": "real element entrances, exits, scale changes, lateral movement, rotation, parallax and timeline-driven scene changes",
+    "exposure": "hautes lumières protégées, détails conservés dans les ombres",
+    "contrast": "moyen, filmique, jamais écrasé",
+    "saturation": "modérée et naturelle",
+    "whiteBalance": "neutre légèrement chaude, constante",
+    "format": "vertical 9:16",
     "avoid": [
-      "browser UI",
-      "generic 3D museum pedestal",
-      "static stills with only zoom",
-      "neon",
-      "excessive glow",
-      "overloaded layouts",
-      "fake readable archive text",
-      "firing",
-      "muzzle flashes",
-      "gore"
+      "néon",
+      "surexposition",
+      "noirs bouchés",
+      "bloom excessif",
+      "interface de jeu",
+      "gore",
+      "personne qui vise ou tire",
+      "munitions mises en scène"
     ]
   },
+  "narration": "Sur Free Fire, tu utilises cette arme sans connaître son histoire… je vais te la raconter. Le Desert Eagle n’est pas né dans un jeu vidéo. À la fin des années 1970, Magnum Research imagine un pistolet semi-automatique pour les cartouches magnum. Le projet est ensuite développé avec Israel Military Industries, en Israël. Sa particularité : un fonctionnement à emprunt de gaz, une architecture peu commune pour un pistolet. Le premier modèle commercialisé, le Mark I en .357 Magnum, arrive à la fin de 1983. D’autres calibres suivent. Au milieu des années 1990, la version .50 Action Express renforce encore sa réputation. Au cinéma, puis dans les jeux vidéo, sa silhouette devient iconique. Mais les dégâts et les performances de Free Fire sont des règles de jeu, pas des faits historiques. La prochaine fois, on racontera l’histoire d’une autre arme que tu connais déjà.",
   "segments": [
     {
       "id": "s01",
-      "words": 16,
+      "guideStart": 0,
+      "guideEnd": 5,
       "text": "Sur Free Fire, tu utilises cette arme sans connaître son histoire… je vais te la raconter.",
-      "visualPrompt": "Vertical 9:16 editorial documentary illustration, a historically plausible Desert Eagle Mark I silhouette as a large isolated cutout, dramatic but restrained, matte olive green background, warm off-white paper shapes, one muted archive-yellow accent, fine ink contours, subtle paper grain, layered 2.5D depth, no text, no logo, no people, no firing, no muzzle flash, no gore.",
-      "motion": "The cutout slides in from the lower edge while two paper layers drift at different speeds; a narrow archive-yellow line draws across the frame. No zoom-only movement."
+      "visualPrompt": "Image verticale 9:16, révélation documentaire d'un Desert Eagle ancien modèle Mark I en vue de profil, posé seul sur un socle de musée sombre, salle d'archives contemporaine très discrète, fond bleu ardoise, liseré bronze doux sur l'acier, proportions réalistes, métal détaillé sans reflets brûlés, aucun humain, aucune munition, aucune action de tir, aucune inscription générée, photoréalisme stylisé cinématographique.",
+      "motion": "dolly-in lent vers l'objet, micro-déplacement latéral de caméra, variation douce de la lumière sur le métal; l'arme reste immobile.",
+      "edit": "Titre ajouté en postproduction : DESERT EAGLE. Fondu depuis le noir, coupe franche sur le premier mot-clé.",
+      "sound": "souffle grave discret, texture de salle d'exposition; aucun bruit de tir."
     },
     {
       "id": "s02",
-      "words": 13,
-      "text": "Fin des années 1970, Magnum Research imagine un pistolet semi-automatique pour cartouches magnum.",
-      "visualPrompt": "Vertical 9:16 late-1970s American industrial design office, an anonymous engineer's hands arranging period-correct paper sketches and drafting tools on a desk, a restrained silhouette study of a large semi-automatic pistol on tracing paper, matte olive green and warm off-white editorial cutout illustration, muted archive-yellow details, cinematic side lighting, fine ink linework, paper grain, layered 2.5D composition, no readable text, no logos, no weapon handling, no firing.",
-      "motion": "Blueprint sheets move laterally in separate parallax layers; a pencil path traces the outline; a small 1979 date card enters from the side."
+      "guideStart": 5,
+      "guideEnd": 14,
+      "text": "Le Desert Eagle n’est pas né dans un jeu vidéo. À la fin des années 1970, Magnum Research imagine un pistolet semi-automatique pour les cartouches magnum.",
+      "visualPrompt": "Bureau d'ingénierie de la fin des années 1970, feuilles de conception techniques non lisibles, règle métallique, compas, crayon, pièces mécaniques génériques et silhouette d'étude d'un grand pistolet semi-automatique sur papier, lumière de bureau chaude contenue, ambiance d'atelier américaine de l'époque sans logo ni personnage identifiable, composition verticale 9:16, documentaire réaliste stylisé, bleu ardoise et acier, bronze très discret, détails fins, sans texte inventé.",
+      "motion": "travelling zénithal lent sur les plans, parallaxe douce entre feuilles et outils, mise au point qui passe du crayon à la silhouette dessinée.",
+      "edit": "Carton discret ajouté en postproduction : FIN DES ANNÉES 1970. Transition par raccord de forme entre le dessin et l'objet réel.",
+      "sound": "papier froissé léger, crayon sur papier, ambiance d'atelier très basse."
     },
     {
       "id": "s03",
-      "words": 18,
-      "text": "Le dessin est breveté en 1980 ; les premiers prototypes suivent en 1981. IMI, en Israël, intervient comme sous-traitant.",
-      "visualPrompt": "Vertical 9:16 historical editorial illustration showing a 1980 patent document and a 1981 early prototype silhouette on an archival workbench, a subtle simplified map connection between the United States and Israel to indicate an industrial subcontracting partnership, matte olive green, warm off-white, restrained archive yellow, fine technical ink drawing, cinematic documentary light, layered paper cutouts and 2.5D depth, no legible fake writing, no flags, no logos, no assembly instructions, no firing.",
-      "motion": "The patent sheet rotates gently into view; the prototype outline is revealed by a moving mask; a thin route line draws between two map points, then settles."
+      "guideStart": 14,
+      "guideEnd": 24,
+      "text": "Le projet est ensuite développé avec Israel Military Industries, en Israël. Sa particularité : un fonctionnement à emprunt de gaz, une architecture peu commune pour un pistolet.",
+      "visualPrompt": "Illustration de documentaire industriel du début des années 1980, atelier de conception d'armes en Israël évoqué sans emblème ni lieu précis, établi propre, techniciens uniquement en silhouettes floues au second plan, au premier plan représentation muséale semi-transparente et non démontable d'un Desert Eagle avec un tracé lumineux abstrait qui suggère le principe général de fonctionnement à gaz sans montrer de schéma opératoire, vertical 9:16, réalisme stylisé, palette acier bleu ardoise et lumière bronze contrôlée, aucune instruction, aucun texte.",
+      "motion": "léger travelling latéral dans l'atelier; sur l'objet, apparition progressive d'un filet lumineux abstrait puis retour à la silhouette entière; pas de pièces qui s'assemblent.",
+      "edit": "Surimpression typographique ajoutée au montage : DÉVELOPPEMENT AVEC IMI. Dissolve court vers la vitrine du Mark I.",
+      "sound": "ambiance industrielle feutrée, vibration métallique douce, sans bruit de manipulation réaliste ni tir."
     },
     {
       "id": "s04",
-      "words": 17,
-      "text": "Fin 1983, le Mark I en .357 Magnum arrive. En 1986, le .44 Magnum rejoint la gamme.",
-      "visualPrompt": "Vertical 9:16 museum-archive editorial cutout illustration of the early Desert Eagle Mark I, historically plausible 1983 profile with no later top accessory rail, presented as a neutral artefact beside a second archival silhouette representing the 1986 .44 Magnum version, matte olive background, warm off-white date cards, restrained archive-yellow accents, crisp ink contours, soft cinematic side light, subtle paper grain, no ammunition, no people, no text, no logos, no firing.",
-      "motion": "A 1983 timeline card locks into place; the Mark I cutout moves forward slightly; a 1986 card slides in and the second silhouette replaces it with a clean match cut."
+      "guideStart": 24,
+      "guideEnd": 33,
+      "text": "Le premier modèle commercialisé, le Mark I en .357 Magnum, arrive à la fin de 1983. D’autres calibres suivent.",
+      "visualPrompt": "Desert Eagle Mark I première génération, apparence historiquement plausible de 1983, finition acier sobre, vue de profil sur socle d'exposition, sans rail supérieur moderne intégré, décor minimal de musée technique des années 1980, éclairage latéral doux, proportions fidèles, vertical 9:16, réalisme stylisé détaillé, aucun humain, aucune munition, aucune action, aucun logo ni texte généré.",
+      "motion": "rotation orbitale très lente de la caméra autour du socle sur quelques degrés, l'objet ne bouge pas; mise au point sur la silhouette puis sur les détails de finition.",
+      "edit": "Carton ajouté en postproduction : 1983 · MARK I · .357 MAGNUM. Match cut sur la ligne supérieure du pistolet.",
+      "sound": "note musicale sobre qui s'ouvre, léger tintement métallique non réaliste."
     },
     {
       "id": "s05",
-      "words": 22,
-      "text": "Au milieu des années 1990, le Mark XIX reçoit le .50 Action Express et s’impose au cinéma comme dans les jeux vidéo.",
-      "visualPrompt": "Vertical 9:16 1990s editorial documentary illustration of a Desert Eagle Mark XIX as a large isolated archival cutout, with a restrained collage of abstract cinema frames and vintage video-game screen shapes in the background, matte olive green, warm off-white and muted archive yellow, controlled highlights, ink contours, paper grain, layered 2.5D depth, no copyrighted characters, no recognizable film posters, no game logos, no firing, no people.",
-      "motion": "A timeline sweeps into the mid-1990s; the Mark XIX cutout glides across the foreground while abstract cinema and game-frame layers slide behind it at different speeds."
+      "guideStart": 33,
+      "guideEnd": 45,
+      "text": "Au milieu des années 1990, la version .50 Action Express renforce encore sa réputation. Au cinéma, puis dans les jeux vidéo, sa silhouette devient iconique.",
+      "visualPrompt": "Version Desert Eagle Mark XIX de l'ère .50 Action Express, représentation muséale de la période du milieu des années 1990, finition acier sombre et reflets bronze subtils, gros plan sur la silhouette et le rail supérieur caractéristique de cette génération, arrière-plan évoquant une salle de cinéma d'archives par des faisceaux lumineux doux sans affiche ni personnage connu, vertical 9:16, documentaire cinématographique réaliste stylisé, pas de munitions, pas de tir, pas de texte généré.",
+      "motion": "macro-travelling le long de la silhouette, puis recul lent révélant l'objet entier; un faisceau lumineux traverse l'arrière-plan sans surexposer.",
+      "edit": "Carton ajouté en postproduction : MILIEU DES ANNÉES 1990 · .50 ACTION EXPRESS. Raccord lumineux très discret vers l'image de jeu stylisée.",
+      "sound": "montée musicale mesurée, texture de projecteur de cinéma très légère; aucun son de combat."
     },
     {
       "id": "s06",
-      "words": 28,
-      "text": "Dans Free Fire, tu vois sa version virtuelle. Dans la réalité, sa fabrication initiale est confiée à IMI. Prochain épisode : la MP40, née pendant la Seconde Guerre mondiale.",
-      "visualPrompt": "Vertical 9:16 closing editorial illustration clearly separating a real historical Desert Eagle archival cutout from a simplified fictional game-inspired silhouette, divided by a warm off-white paper seam; a small distant MP40 silhouette appears only as a teaser card at the bottom, matte olive green, restrained archive yellow, fine ink contours, cinematic documentary composition, layered 2.5D depth, no Free Fire logo or copied game interface, no people, no firing, no gore, no text.",
-      "motion": "The real artefact and fictional silhouette separate into two panels; the paper seam closes, then a small MP40 teaser card rises at the final beat with a short light sweep."
+      "guideStart": 45,
+      "guideEnd": 58,
+      "text": "Mais les dégâts et les performances de Free Fire sont des règles de jeu, pas des faits historiques. La prochaine fois, on racontera l’histoire d’une autre arme que tu connais déjà.",
+      "visualPrompt": "Composition verticale en deux plans visuels clairement séparés : à gauche un Desert Eagle réaliste exposé dans un musée, à droite une silhouette abstraite inspirée de l'esthétique d'un jeu mobile battle royale, formes polygonales et particules numériques sobres sans reprendre de capture d'écran ni interface officielle, séparation nette entre histoire réelle et fiction vidéoludique, bleu ardoise, acier et bronze discret, lumière contrôlée, aucun personnage armé, aucune violence, 9:16 documentaire cinématographique.",
+      "motion": "la caméra recule lentement; le décor muséal reste stable tandis que les particules numériques apparaissent doucement à droite; fin sur un fondu au noir.",
+      "edit": "Texte ajouté en postproduction : JEU VIDÉO ≠ HISTOIRE RÉELLE. Dernière seconde : teaser typographique du prochain sujet, AK-47, sans commencer son histoire.",
+      "sound": "résolution musicale chaleureuse, petite ponctuation sonore au teaser, puis silence propre."
     }
   ],
-  "historicalNotes": [
-    "Le projet du Desert Eagle est conçu chez Magnum Research à partir de 1979.",
-    "Le dessin de base est breveté en 1980 et des prototypes fonctionnels sont réalisés en 1981.",
-    "Israel Military Industries intervient comme sous-traitant pour finaliser et fabriquer le pistolet; ne pas présenter IMI comme propriétaire initial du dessin.",
-    "Le Mark I en .357 Magnum arrive sur le marché à la fin de 1983.",
-    "Une version en .44 Magnum apparaît en 1986.",
-    "Le Mark XIX et la chambre .50 Action Express arrivent au milieu des années 1990.",
-    "Les caractéristiques de Free Fire sont une représentation vidéoludique et ne doivent pas être présentées comme des données historiques."
-  ],
-  "sources": [
+  "editNotes": {
+    "timing": "Les plages secondes sont des guides de montage uniquement. Les timecodes définitifs doivent être recalculés à partir du WAV réellement généré et d'un alignement forcé audio/texte; ne pas caler les scènes uniquement au nombre de mots.",
+    "pacing": "Voix naturelle, environ 145 à 155 mots par minute, respirations courtes après les dates et les transitions historiques.",
+    "transitions": "Fondus de 6 à 10 images, raccords de forme, travelling et parallaxe réels; éviter le simple zoom sur image fixe comme animation principale.",
+    "soundDesign": "Musique documentaire discrète, ambiances d'atelier et de musée; aucun tir, explosion ou effet qui glorifie l'usage de l'arme.",
+    "grade": "Exposition protégée, contraste filmique moyen, saturation modérée, balance neutre-chaude cohérente sur toutes les scènes.",
+    "subtitles": "Optionnels; si activés, sous-titres français sobres synchronisés sur les timecodes audio réels."
+  },
+  "factCheck": [
     {
-      "title": "American Rifleman, The Magnum Research Desert Eagle .50",
-      "url": "https://www.americanrifleman.org/content/the-magnum-research-desert-eagle-50/",
-      "supports": "1979 concept, 1980 patent, 1981 prototypes, IMI finalization, Mark I late 1983, .44 Magnum in 1986, .50 AE and Mark XIX in the mid-1990s."
+      "claim": "Magnum Research est lié au projet depuis 1979; le Desert Eagle a d'abord été fabriqué en Israël par Israel Military Industries.",
+      "status": "documenté",
+      "source": "https://www.magnumresearch.com/company-history/"
     },
     {
-      "title": "Magnum Research, Company History",
-      "url": "https://www.magnumresearch.com/company-history/",
-      "supports": "Company history, initial Israeli manufacturing by IMI, later production move to Minnesota."
+      "claim": "Le concept remonte à 1979; le Mark I en .357 Magnum est arrivé sur le marché à la fin de 1983 après finalisation avec IMI.",
+      "status": "documenté par une publication spécialisée; la date est formulée comme 'fin 1983'",
+      "source": "https://www.americanrifleman.org/articles/2011/6/3/the-magnum-research-desert-eagle-50/"
     },
     {
-      "title": "Magnum Research, Nine Things You Didn't Know About the Desert Eagle",
-      "url": "https://www.magnumresearch.com/american-rifleman-nine-things-you-didnt-know-about-the-magnum-research-desert-eagle/",
-      "supports": "Clarifies IMI was a subcontractor and did not own the original design."
+      "claim": "Le mécanisme à emprunt de gaz est documenté par les brevets de pistolet à gaz associés à IMI et Magnum Research.",
+      "status": "documenté; le script reste volontairement général",
+      "source": "https://patents.google.com/patent/US4619184A/en"
+    },
+    {
+      "claim": "La version .50 Action Express et l'évolution Mark XIX apparaissent au milieu des années 1990.",
+      "status": "documenté",
+      "source": "https://www.americanrifleman.org/content/desert-eagle-mark-xix/"
+    },
+    {
+      "claim": "Garena présente le Desert Eagle comme une arme de poing de Free Fire; les statistiques et sensations du jeu ne décrivent pas les performances réelles.",
+      "status": "documenté pour sa présence dans le jeu; distinction jeu/réalité éditoriale",
+      "source": "https://ff.garena.com/en/weapons/103/"
     }
   ],
-  "nextEpisodeTeaser": "MP40 — une arme née pendant la Seconde Guerre mondiale",
-  "renderer": "remotion-2d-motion-design",
-  "voiceSource": {
-    "engine": "Piper",
-    "model": "fr_FR-mls-medium",
-    "speakerId": 0,
-    "datasetSpeakerId": "1840",
-    "gender": "male",
-    "datasetLicense": "CC-BY-4.0",
-    "attributionRequired": true
+  "nextEpisode": {
+    "weapon": "AK-47",
+    "teaser": "La prochaine fois, on remonte l'histoire du fusil que presque tout le monde reconnaît."
+  },
+  "productionStatus": {
+    "script": "ready",
+    "research": "fact-checked",
+    "visualPrompts": "ready",
+    "voiceAudio": "not_generated",
+    "forcedAlignment": "pending_audio",
+    "finalRender": "not_rendered"
   }
 }
