@@ -1,5 +1,6 @@
 name: EURO ARMS — générer la narration Desert Eagle
 # L'artefact audio est consommé par render-episode-001.yml après succès.
+# Relancer la narration sur push permet de tester la chaîne audio puis le rendu.
 
 on:
   workflow_dispatch:
