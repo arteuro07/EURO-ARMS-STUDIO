@@ -1,4 +1,5 @@
 name: EURO ARMS — générer la narration Desert Eagle
+# Pipeline relancé après amélioration des animations Remotion de l’épisode 001.
 # L'artefact audio est consommé par render-episode-001.yml après succès.
 # Relancer la narration sur push permet de tester la chaîne audio puis le rendu.
 
