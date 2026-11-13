@@ -1,40 +1,51 @@
-# EURO TTS — moteur de narration
+# EURO TTS — voix et moteur de narration
 
-## Objectif
-Fournir une narration française masculine, constante d'un épisode à l'autre, sans jamais utiliser un enregistrement vocal de l'utilisateur.
+## Identité vocale retenue
 
-## Prototype de production retenu
-- **Moteur :** Piper TTS, exécuté sur CPU dans GitHub Actions.
-- **Modèle :** `fr_FR-mls-medium`.
-- **Locuteur fixe :** speaker_id 0, correspondant à l'identifiant du corpus MLS `1840`.
-- **Profil :** voix française masculine, posée et chaleureuse ; le catalogue de voix la répertorie comme masculine.
-- **Sortie :** WAV, 22 050 Hz.
-- **Attribution :** le modèle MLS indique le dataset sous licence CC BY 4.0. Le workflow produit un fichier `ATTRIBUTION.txt` avec les livrables. Cette attribution doit rester jointe à toute redistribution.
-- **Cohérence :** le même modèle et le même speaker_id doivent être utilisés pour tous les épisodes.
+La voix approuvée à l'écoute pour la série est le locuteur **0** du modèle Piper français MLS, correspondant à l'identifiant de dataset **1840**.
 
-## Ce que signifie « notre TTS »
-EURO TTS est notre pipeline de production et de synchronisation, construit autour d'un moteur open source. Nous ne prétendons pas avoir entraîné le modèle acoustique depuis zéro : le modèle vocal français existe déjà et est issu du corpus MLS. Cela permet de générer gratuitement les narrations sur les runners GitHub sans API TTS payante ni enregistrement personnel.
+- Profil interne : `euro-documentary-fr-01`
+- Moteur : Piper TTS
+- Modèle : `fr_FR-mls-medium`
+- Locuteur Piper : `speaker_id=0`
+- Identifiant de dataset : `1840`
+- Sortie : WAV PCM, 22 050 Hz
+- Usage : narration documentaire française
+- Enregistrement personnel : aucun
 
-## Pipeline actif
-1. Lire les segments de l'épisode depuis `episodes/NNN-*/episode.json`.
-2. Charger une seule fois le modèle Piper et le locuteur 0.
-3. Générer un WAV distinct pour chaque segment.
-4. Mesurer la durée réelle de chaque WAV PCM.
-5. Assembler la narration complète avec de courts séparateurs.
-6. Écrire `timeline.json` à partir des durées audio mesurées.
-7. Contrôler le nombre de scènes, les durées, l'ordre et la continuité.
-8. Transmettre l'audio et la timeline au rendu Remotion/FFmpeg.
+La voix reste identique d'un épisode à l'autre. Ne pas changer de modèle, de speaker ID ou de paramètres sans validation explicite.
 
-## Limites et décisions
-- La voix actuelle est une voix de corpus autorisée, pas une identité vocale inventée de zéro.
-- La qualité finale doit être contrôlée à l'écoute sur les épisodes ; une génération techniquement réussie ne garantit pas une narration suffisamment naturelle.
-- Ne pas changer de speaker_id entre épisodes sans décision explicite.
-- Ne pas cloner une voix identifiable sans autorisation appropriée.
-- Pocket TTS a été étudié comme piste expérimentale, mais il n'est pas le moteur du pipeline de production actuel.
+## Ce que signifie « EURO TTS »
 
-## Références
-- Piper : https://github.com/OHF-Voice/piper1-gpl
-- Modèle français MLS et fiche de licence : https://huggingface.co/rhasspy/piper-voices/tree/main/fr/fr_FR/mls/medium
-- Catalogue des voix Piper : https://huggingface.co/rhasspy/piper-voices/blob/main/voices.json
-- Identification du speaker 1840 comme voix masculine française : https://naadly.com/voices/clement-quesnel
-- Dataset MLS : https://openslr.org/94/
+EURO TTS est notre chaîne de synthèse et de production : configuration de la voix, génération segmentée, assemblage WAV, mesure des durées, attribution, puis synchronisation avec les scènes et le rendu vidéo.
+
+Le moteur vocal est Piper, un moteur open source. Nous ne prétendons pas avoir entraîné un modèle acoustique propriétaire depuis zéro. Notre valeur ajoutée est le pipeline contrôlé et la continuité de la voix sur toute la série.
+
+## Licence et attribution
+
+La fiche du modèle `fr_FR-mls-medium` indique que les enregistrements du dataset MLS sont sous **CC BY 4.0**. Conserver l'attribution et la référence du modèle dans les livrables audio/vidéo redistribués.
+
+- Fiche du modèle : https://huggingface.co/rhasspy/piper-voices/tree/main/fr/fr_FR/mls/medium
+- Correspondance des locuteurs : https://huggingface.co/rhasspy/piper-voices/blob/main/voices.json
+- Dataset MLS : http://openslr.org/94/
+- Moteur Piper : https://github.com/OHF-Voice/piper1-gpl
+
+Le code du moteur et la licence des données vocales sont deux éléments distincts : respecter les conditions de chacun. Ne pas retirer `ATTRIBUTION.txt` des artefacts.
+
+## Pipeline validé pour l'épisode 001
+
+1. Charger une seule fois le modèle Piper.
+2. Générer un fichier WAV par segment narratif avec `speaker_id=0`.
+3. Mesurer la durée réelle de chaque fichier PCM.
+4. Assembler les WAV en conservant 0,12 seconde de respiration entre segments.
+5. Écrire `timeline.json` avec les vrais débuts et fins des segments.
+6. Vérifier le nombre de scènes, la durée totale, l'absence de chevauchement et la cohérence audio/timeline.
+7. Transmettre cette timeline au rendu Remotion afin que chaque scène suive le segment vocal correspondant.
+
+Les timecodes sont mesurés à partir des WAV segmentés. Il s'agit d'une synchronisation réelle au niveau des scènes, pas encore d'un alignement forcé mot à mot.
+
+## Limites et prochaines améliorations
+
+- La voix est une voix de synthèse issue d'un modèle public, pas une voix créée de zéro.
+- Pour un modèle entièrement original, il faudrait un corpus vocal dont les droits sont explicitement acquis ou une méthode de génération synthétique autorisée; aucun enregistrement personnel ne sera demandé.
+- Les améliorations prioritaires sont la prosodie, les pauses, la ponctuation, les noms propres et la cohérence de débit, sans changer de locuteur.
