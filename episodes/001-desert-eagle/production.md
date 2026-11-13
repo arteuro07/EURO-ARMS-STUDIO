@@ -96,6 +96,10 @@ Les dates de conception, brevet, prototypes et commercialisation sont corroboré
 2. Magnum Research, « Company History » — https://www.magnumresearch.com/company-history/
 3. Magnum Research, « Nine Things You Didn't Know About the Magnum Research Desert Eagle » — https://www.magnumresearch.com/american-rifleman-nine-things-you-didnt-know-about-the-magnum-research-desert-eagle/
 
+4. Brevet US 4,619,184, « Gas actuated pistol » — https://patents.google.com/patent/US4619184A/en (documente le principe général d'un pistolet à fonctionnement par gaz; ne pas en tirer de détails opératoires dans la vidéo).
+5. Garena Free Fire, catalogue officiel des armes — https://ff.garena.com/en/weapons/103/ (confirme la présence du Desert Eagle dans le jeu).
+6. Garena Free Fire, catalogue officiel des mitraillettes — https://ff.garena.com/en/weapons/52/ (confirme la présence de la MP40 dans le jeu, choisie comme prochain sujet).
+
 ## État de production
 
 Le workflow Piper a généré six segments WAV, un WAV complet de 55,74 secondes et une timeline mesurée ; les contrôles automatiques de durée et de continuité ont réussi. Les scènes démarrent aux timecodes réels : 00:00, 00:05,08, 00:12,12, 00:23,05, 00:34,39 et 00:42,34. Des séparateurs silencieux de 0,12 seconde sont insérés entre les segments. Le profil fixe est le locuteur MLS 0 (speaker 1840), une voix masculine française cataloguée. La voix n'est pas clonée à partir d'un enregistrement personnel. L'attribution CC BY 4.0 est jointe aux livrables. Les timecodes finaux sont ceux du fichier timeline.json produit par le workflow, pas les estimations de ce document.
