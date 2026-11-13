@@ -54,8 +54,8 @@ function Art({kind,progress}) {
 export const DesertEagleEpisode=({timeline})=>{
   const frame=useCurrentFrame(); const {fps}=useVideoConfig(); const seconds=frame/fps;
   const items=timeline?.segments?.length?timeline.segments:[];
-  const activeIndex=Math.max(0,items.findIndex((s,i)=>seconds>=s.start&&(seconds<s.end||i===items.length-1)));
-  const index=activeIndex<0?items.length-1:activeIndex;
+  let index=items.findIndex((s,i)=>seconds>=s.start&&(seconds<s.end||i===items.length-1&&seconds<=s.end));
+  if(index<0) index=items.reduce((last,s,i)=>seconds>=s.start?i:last,0);
   const timing=items[index]||{start:0,end:timeline?.duration||40};
   const progress=Math.max(0,Math.min(1,(seconds-timing.start)/Math.max(.01,timing.end-timing.start)));
   const data=scenes[index]||scenes[0];
