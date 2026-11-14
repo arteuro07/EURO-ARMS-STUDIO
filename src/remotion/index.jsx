@@ -1,8 +1,7 @@
 import React from "react";
 import {Composition, registerRoot} from "remotion";
 import {DesertEagleEpisode} from "./DesertEagleEpisode.jsx";
-import {Motion3DShowcase} from "./Motion3DShowcase.jsx";
-import {DesertEagleHistory3D} from "./DesertEagleHistory3D.jsx";
+import {DesertEagle2DPrototype} from "./DesertEagle2DPrototype.jsx";
 
 const Root = () => (
   <>
@@ -19,16 +18,8 @@ const Root = () => (
       })}
     />
     <Composition
-      id="Motion3DShowcase"
-      component={Motion3DShowcase}
-      width={1080}
-      height={1920}
-      fps={30}
-      durationInFrames={360}
-    />
-    <Composition
-      id="DesertEagleHistory3D"
-      component={DesertEagleHistory3D}
+      id="DesertEagle2DPrototype"
+      component={DesertEagle2DPrototype}
       width={1080}
       height={1920}
       fps={30}
