@@ -1,4 +1,4 @@
 import {Config} from "@remotion/cli/config";
 
-// GitHub Actions runners have no physical GPU: use ANGLE + SwiftShader.
-Config.setChromiumOpenGlRenderer("swangle");
+// Standard 2D rendering: no WebGL, no Three.js, no GPU renderer override.
+Config.setChromiumOpenGlRenderer("angle");
