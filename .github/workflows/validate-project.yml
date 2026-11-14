@@ -1,0 +1,26 @@
+name: Validate universal project
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'projects/**'
+      - 'schemas/**'
+      - 'scripts/validate_project.mjs'
+      - 'package.json'
+      - '.github/workflows/validate-project.yml'
+  pull_request:
+    paths:
+      - 'projects/**'
+      - 'schemas/**'
+      - 'scripts/validate_project.mjs'
+      - 'package.json'
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm run validate:project
