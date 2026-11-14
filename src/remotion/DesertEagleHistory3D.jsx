@@ -121,16 +121,16 @@ export const DesertEagleHistory3D = () => {
         <gridHelper args={[12,36,"#23465c","#122a3a"]} position={[0,-1.6,0]}/>
       </ThreeCanvas>
 
-      <AbsoluteFill style={{padding:"105px 76px 90px",justifyContent:"space-between",pointerEvents:"none"}}>
+      <AbsoluteFill style={{padding:"105px 76px 90px",pointerEvents:"none"}}>
         <div style={{display:"flex",justifyContent:"space-between",fontSize:20,fontWeight:700,letterSpacing:5,color:"#b7c6ce",opacity:0.78}}>
           <span>EURO / ARMS</span><span>ARCHIVES · 001</span>
         </div>
-        <div style={{marginTop:120,textAlign:"center",opacity:fade,transform:`translateY(${interpolate(local,[0,0.5,1],[24,0,-12])}px)`}}>
+        <div style={{position:"absolute",top:300,left:76,right:76,textAlign:"center",opacity:fade,transform:`translateY(${interpolate(local,[0,0.5,1],[24,0,-12])}px)`}}>
           <div style={{fontSize:25,letterSpacing:6,fontWeight:800,color:item.accent,marginBottom:20}}>{item.date}</div>
           <div style={{fontSize:58,lineHeight:1.08,fontWeight:900,letterSpacing:-1,color:"#f1f3ef",textShadow:"0 5px 28px #0009"}}>{item.title}</div>
           <div style={{fontSize:25,letterSpacing:1.2,color:"#c1d0d7",marginTop:20}}>{item.line}</div>
         </div>
-        <div>
+        <div style={{position:"absolute",left:76,right:76,bottom:90}}>
           <div style={{height:3,background:"#ffffff26",marginBottom:22}}>
             <div style={{height:3,width:`${progress*100}%`,background:"#e9b35b"}}/>
           </div>
