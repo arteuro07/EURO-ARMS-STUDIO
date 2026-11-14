@@ -7,10 +7,13 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "validate:project": "node scripts/validate_project.mjs projects/example/project.json"
+    "validate:project": "node scripts/validate_project.mjs projects/example/project.json",
+    "render:motion3d": "remotion render src/remotion/index.jsx Motion3DShowcase dist/motion3d-showcase.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p"
   },
   "dependencies": {
     "three": "^0.180.0",
+    "@react-three/fiber": "^8.18.0",
+    "@remotion/three": "^4.0.0",
     "remotion": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
