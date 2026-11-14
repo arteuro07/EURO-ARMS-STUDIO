@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://euro-motion-studio.local/schemas/project.schema.json",
+  "title": "EURO MOTION STUDIO Project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "projectId",
+    "title",
+    "category",
+    "language",
+    "platform",
+    "format",
+    "fps",
+    "visualStyle",
+    "narration",
+    "scenes"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,63}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "category": {
+      "type": "string",
+      "minLength": 2
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "platform": {
+      "enum": [
+        "tiktok",
+        "youtube-shorts",
+        "instagram-reels",
+        "youtube",
+        "multi"
+      ]
+    },
+    "format": {
+      "enum": [
+        "vertical",
+        "horizontal",
+        "square"
+      ]
+    },
+    "fps": {
+      "enum": [
+        24,
+        25,
+        30,
+        50,
+        60
+      ]
+    },
+    "targetDurationSec": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "visualStyle": {
+      "type": "object",
+      "required": [
+        "mode",
+        "description"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "2d",
+            "2.5d",
+            "3d",
+            "hybrid",
+            "live-action"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 8
+        },
+        "colorNotes": {
+          "type": "string"
+        },
+        "cameraLanguage": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "narration": {
+      "type": "object",
+      "required": [
+        "mode"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "tts",
+            "imported",
+            "none"
+          ]
+        },
+        "voiceProfile": {
+          "type": "string"
+        },
+        "audioFile": {
+          "type": "string"
+        },
+        "transcript": {
+          "type": "string"
+        },
+        "alignmentFile": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "startSec",
+          "durationSec",
+          "narrationText",
+          "visualDescription",
+          "animation"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "startSec": {
+            "type": "number",
+            "minimum": 0
+          },
+          "durationSec": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "narrationText": {
+            "type": "string"
+          },
+          "visualDescription": {
+            "type": "string",
+            "minLength": 8
+          },
+          "assetIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "animation": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "enum": [
+                "subject",
+                "camera",
+                "light",
+                "environment",
+                "particles",
+                "typography",
+                "diagram"
+              ]
+            }
+          },
+          "transitionOut": {
+            "enum": [
+              "cut",
+              "dissolve",
+              "match-cut",
+              "whip",
+              "fade",
+              "none"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "path"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "image",
+              "video",
+              "audio",
+              "model3d",
+              "font",
+              "other"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string"
+          },
+          "sourceUrl": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 256
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 256
+        },
+        "codec": {
+          "enum": [
+            "h264",
+            "h265"
+          ]
+        },
+        "quality": {
+          "enum": [
+            "preview",
+            "standard",
+            "high"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
