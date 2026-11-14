@@ -22,6 +22,10 @@ jobs:
         run: npm install
       - name: Render 3D historical sequence
         run: npm run render:history3d
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
       - name: Verify MP4
         run: |
           test -s dist/desert-eagle-history-3d.mp4
