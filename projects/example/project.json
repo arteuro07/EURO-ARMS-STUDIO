@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "projectId": "ocean-depths-001",
+  "title": "Les secrets des abysses",
+  "category": "science-documentary",
+  "language": "fr",
+  "platform": "tiktok",
+  "format": "vertical",
+  "fps": 30,
+  "targetDurationSec": 45,
+  "visualStyle": {
+    "mode": "3d",
+    "description": "Documentaire scientifique cinématique, océan profond réaliste, lumière contrôlée et particules subtiles",
+    "colorNotes": "Bleus profonds, cyan discret, blancs non brûlés",
+    "cameraLanguage": "Travellings lents, macro et révélations progressives"
+  },
+  "narration": {
+    "mode": "imported",
+    "voiceProfile": "euro-narrator-fr-v1",
+    "transcript": "Sous la surface des océans se cache un monde presque inconnu.",
+    "alignmentFile": ""
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "startSec": 0,
+      "durationSec": 6,
+      "narrationText": "Sous la surface des océans se cache un monde presque inconnu.",
+      "visualDescription": "La caméra plonge depuis la surface vers les abysses.",
+      "assetIds": [],
+      "animation": [
+        "camera",
+        "environment",
+        "particles"
+      ],
+      "transitionOut": "cut"
+    },
+    {
+      "id": "reveal",
+      "startSec": 6,
+      "durationSec": 12,
+      "narrationText": "À mesure que la lumière disparaît, des créatures étonnantes apparaissent.",
+      "visualDescription": "Une créature bioluminescente traverse lentement le cadre.",
+      "assetIds": [],
+      "animation": [
+        "subject",
+        "camera",
+        "light"
+      ],
+      "transitionOut": "dissolve"
+    }
+  ],
+  "assets": [],
+  "output": {
+    "width": 1080,
+    "height": 1920,
+    "codec": "h264",
+    "quality": "preview"
+  }
+}
