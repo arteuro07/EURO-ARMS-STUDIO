@@ -1,0 +1,44 @@
+name: Render EURO ARMS 2D prototype
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/remotion/DesertEagle2DPrototype.jsx"
+      - "src/remotion/index.jsx"
+      - "package.json"
+      - ".github/workflows/render-2d-prototype.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Render 15-second 2D prototype
+        run: npm run render:prototype2d
+      - name: Verify video
+        run: |
+          test -s dist/euro-arms-desert-eagle-2d-prototype.mp4
+          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height,r_frame_rate,duration -of default=noprint_wrappers=1 dist/euro-arms-desert-eagle-2d-prototype.mp4
+          ffprobe -v error -show_entries format=duration -of csv=p=0 dist/euro-arms-desert-eagle-2d-prototype.mp4 | awk '{ if ($1 < 14.9 || $1 > 15.2) exit 1 }'
+      - name: Upload 2D prototype
+        uses: actions/upload-artifact@v4
+        with:
+          name: euro-arms-desert-eagle-2d-prototype
+          path: dist/euro-arms-desert-eagle-2d-prototype.mp4
+          if-no-files-found: error
