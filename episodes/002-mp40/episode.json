@@ -1,0 +1,97 @@
+{
+  "id": "002",
+  "title": "MP40 : le surnom qui raconte une erreur",
+  "weapon": "MP40",
+  "language": "fr-FR",
+  "targetSeconds": 56,
+  "format": "9:16",
+  "voiceProfile": "euro-documentary-fr-01",
+  "visualStyle": {
+    "look": "cinematic historical documentary, realistic stylized illustration",
+    "palette": [
+      "slate blue",
+      "neutral steel",
+      "restrained warm bronze"
+    ],
+    "exposure": "protect highlights; preserve shadow detail",
+    "contrast": "medium, filmic, never crushed",
+    "saturation": "moderate, natural materials",
+    "whiteBalance": "consistent neutral-warm",
+    "texture": "fine film grain, realistic materials, controlled atmospheric depth",
+    "avoid": [
+      "neon colors",
+      "overexposure",
+      "crushed blacks",
+      "excessive bloom",
+      "game-like UI",
+      "Nazi propaganda symbols",
+      "firing",
+      "gore",
+      "glorification"
+    ]
+  },
+  "historyNotes": [
+    "La MP40 est une évolution simplifiée de la MP38.",
+    "La MP38 a été adoptée en 1938 et est associée au concepteur Heinrich Vollmer.",
+    "La MP40 apparaît en 1940 et simplifie la fabrication en utilisant davantage de pièces embouties.",
+    "Elle est chambrée en 9 × 19 mm Parabellum et possède une crosse repliable.",
+    "Le surnom allié « Schmeisser » est trompeur : Hugo Schmeisser n'a pas conçu la MP40."
+  ],
+  "segments": [
+    {
+      "id": "s01",
+      "words": 21,
+      "text": "Dans Free Fire, la MP40 est connue pour sa cadence. Mais son histoire commence dans l’Europe de la Seconde Guerre mondiale.",
+      "visualPrompt": "Vertical 9:16 cinematic historical documentary illustration. A historically accurate MP40 displayed as a museum artefact in a quiet wartime archive, three-quarter side view, dark slate-blue background, neutral steel surfaces, restrained warm bronze rim light, realistic stylized detail, fine film grain, controlled highlights, no markings or insignia, no people, no firing, no gore, no text.",
+      "motion": "slow-dolly-in with subtle foreground-background parallax; a narrow warm light moves gently across the museum glass"
+    },
+    {
+      "id": "s02",
+      "words": 22,
+      "text": "Elle descend de la MP38, adoptée par l’Allemagne en 1938 et conçue par Heinrich Vollmer. Cette première version est coûteuse à produire.",
+      "visualPrompt": "Vertical 9:16 cinematic historical documentary illustration of an authentic-looking MP38 museum artefact beside archival engineering drawings from late-1930s Germany, period-correct drafting desk and paper, slate-blue shadows, neutral steel, restrained warm bronze highlights, realistic stylized surfaces, no legible invented writing, no Nazi symbols, no firing, no people.",
+      "motion": "slow lateral camera track across the archival drawings; layered papers shift with restrained parallax, ending on the MP38 silhouette"
+    },
+    {
+      "id": "s03",
+      "words": 22,
+      "text": "En 1940 apparaît la MP40 : une évolution simplifiée, pensée pour accélérer la fabrication grâce à davantage de pièces en acier embouti.",
+      "visualPrompt": "Vertical 9:16 cinematic industrial-history illustration, 1940-era German factory floor with a large mechanical press and orderly stamped steel components in the background, a finished MP40 shown only as a museum-style silhouette in the foreground, historically plausible machinery, slate-blue and neutral-steel palette, subtle warm bronze practical lights, realistic stylized documentary detail, no assembly instructions, no readable labels, no insignia, no workers operating weapons.",
+      "motion": "controlled crane-down from factory rafters to the press; a few steel sheets move through the frame as environmental animation, no weapon assembly"
+    },
+    {
+      "id": "s04",
+      "words": 26,
+      "text": "Compacte, avec sa crosse repliable, elle équipe notamment des soldats des unités mécanisées et des équipages de véhicules. Elle utilise la cartouche de 9 millimètres Parabellum.",
+      "visualPrompt": "Vertical 9:16 restrained World War II documentary scene showing a historically plausible German half-track interior and anonymous mechanized-unit silhouettes in the distance, with a folded-stock MP40 represented as a museum artefact in the foreground; neutral documentary framing, no combat, no firing, no visible insignia, slate-blue shadows, steel grey, restrained bronze practical light, realistic stylized cinematic illustration.",
+      "motion": "slow tracking move past the stationary vehicle; soft environmental dust and distant light movement, foreground artefact remains stable"
+    },
+    {
+      "id": "s05",
+      "words": 21,
+      "text": "Et voici une erreur célèbre : les Alliés l’appelaient souvent « Schmeisser », mais Hugo Schmeisser n’a pas conçu la MP40.",
+      "visualPrompt": "Vertical 9:16 archival research-table illustration, a historically accurate MP40 museum silhouette beside two separate archival folders and an old typewriter, one folder visually marked as a mistaken nickname by a red pencil correction but with no generated readable text, slate-blue shadows, neutral steel, restrained warm bronze, realistic stylized documentary photography, no portraits, no insignia, no propaganda.",
+      "motion": "top-down camera drift; the mistaken-name card slides aside while a clean archival caption is added in post-production"
+    },
+    {
+      "id": "s06",
+      "words": 29,
+      "text": "Dans Free Fire, sa cadence et son rôle à courte portée sont des choix de gameplay, pas une fiche historique. La prochaine fois, on remonte l’histoire de la Thompson.",
+      "visualPrompt": "Vertical 9:16 cinematic split composition: on one side a real-world MP40 museum artefact in a restrained archival setting, on the other a clearly fictional abstract mobile-game-inspired silhouette with no copied interface or logos; a subtle Thompson silhouette appears on a distant teaser card, consistent slate-blue, neutral-steel and restrained warm-bronze grade, realistic stylized documentary finish, no firing, no people, no gore.",
+      "motion": "the archival and fictional layers separate with a clean vertical parallax reveal; camera pulls back to reveal the Thompson teaser card"
+    }
+  ],
+  "sources": [
+    "https://www.awm.gov.au/collection/C236719",
+    "https://www.awm.gov.au/collection/C235943",
+    "https://paradata.org.uk/content/4663887-mp40-sub-machine-gun",
+    "https://ff.garena.com/en/weapons/52/"
+  ],
+  "production": {
+    "voice": "Use the single approved project voice profile. Do not substitute a new voice for this episode.",
+    "alignment": "Final scene boundaries must come from forced alignment or measured audio segments, not proportional word estimates.",
+    "audio": "Narration first; restrained non-combat ambience underneath; no gunfire or explosion effects.",
+    "render": "1080x1920, 9:16, H.264, 30 fps, voice intelligibility prioritized.",
+    "motionRule": "Every scene must contain independent environmental, object, or camera motion; a still image with only a zoom is not sufficient."
+  }
+}
