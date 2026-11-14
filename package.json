@@ -1,20 +1,16 @@
 {
   "name": "euro-motion-studio",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "validate:project": "node scripts/validate_project.mjs projects/example/project.json",
-    "render:motion3d": "remotion render src/remotion/index.jsx Motion3DShowcase dist/motion3d-showcase.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p",
-    "render:history3d": "remotion render src/remotion/index.jsx DesertEagleHistory3D dist/desert-eagle-history-3d.mp4 --gl=swangle --codec=h264 --crf=18 --pixel-format=yuv420p"
+    "render:prototype2d": "remotion render src/remotion/index.jsx DesertEagle2DPrototype dist/euro-arms-desert-eagle-2d-prototype.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p"
   },
   "dependencies": {
-    "three": "^0.180.0",
-    "@react-three/fiber": "^8.18.0",
-    "@remotion/three": "^4.0.0",
     "remotion": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
