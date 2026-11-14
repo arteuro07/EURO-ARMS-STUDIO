@@ -1,12 +1,13 @@
 {
-  "name": "euro-arms-studio",
+  "name": "euro-motion-studio",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0"
+    "preview": "vite preview --host 0.0.0.0",
+    "validate:project": "node scripts/validate_project.mjs projects/example/project.json"
   },
   "dependencies": {
     "three": "^0.180.0",
