@@ -1,0 +1,31 @@
+name: Render Three.js motion test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/remotion/**"
+      - "package.json"
+      - "remotion.config.js"
+      - ".github/workflows/render-motion3d.yml"
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Render deterministic 3D showcase
+        run: npm run render:motion3d
+      - name: Upload preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: euro-motion-studio-3d-showcase
+          path: dist/motion3d-showcase.mp4
+          if-no-files-found: error
