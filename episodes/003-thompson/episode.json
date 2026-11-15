@@ -1,0 +1,100 @@
+{
+  "id": "003",
+  "title": "Thompson : conçue pour une guerre qui s'est terminée trop tôt",
+  "weapon": "Thompson",
+  "language": "fr-FR",
+  "targetSeconds": 56,
+  "format": "9:16",
+  "voiceProfile": "euro-documentary-fr-01",
+  "visualStyle": {
+    "look": "cinematic historical documentary, realistic stylized illustration",
+    "palette": [
+      "slate blue",
+      "neutral steel",
+      "restrained warm bronze"
+    ],
+    "exposure": "protect highlights; preserve shadow detail",
+    "contrast": "medium, filmic, never crushed",
+    "saturation": "moderate, natural materials",
+    "whiteBalance": "consistent neutral-warm",
+    "texture": "fine film grain, realistic materials, controlled atmospheric depth",
+    "avoid": [
+      "neon colors",
+      "overexposure",
+      "crushed blacks",
+      "excessive bloom",
+      "game-like UI",
+      "propaganda imagery",
+      "firing",
+      "gore",
+      "glorification"
+    ]
+  },
+  "historyNotes": [
+    "Le général américain John T. Thompson développe le projet pendant la Première Guerre mondiale pour répondre à un besoin d'arme individuelle destinée aux tranchées.",
+    "Les premiers modèles ne sont pas prêts avant la fin de la Première Guerre mondiale.",
+    "L'appellation Thompson Submachine Gun est officialisée en 1919 selon l'historique de l'US Army.",
+    "Le modèle 1921 entre en production ; le Smithsonian identifie Auto-Ordnance comme maker et Colt's Patent Firearms Manufacturing Company comme fabricant du modèle 1921AC conservé dans ses collections.",
+    "Le modèle historique présenté par le Smithsonian utilise la cartouche .45 ACP.",
+    "Le M1928A1 est adopté par l'armée américaine en 1938 ; des variantes simplifiées M1 puis M1A1 sont produites à partir de 1942 selon l'historique de l'US Army.",
+    "La Thompson figure dans le catalogue officiel de Free Fire ; ses paramètres de jeu ne sont pas des données historiques."
+  ],
+  "voiceover": "Tu as déjà vu la Thompson dans Free Fire. Mais cette silhouette au chargeur rond a été imaginée bien avant les jeux vidéo. À la fin de la Première Guerre mondiale, le général américain John T. Thompson cherche une arme individuelle pour les combats dans les tranchées. Le projet arrive trop tard : les premiers modèles ne sont pas prêts avant l’armistice. En 1919, le nom « Thompson Submachine Gun » est adopté. Le modèle 1921 entre ensuite en production, avec Auto-Ordnance et Colt. Mais la Thompson ne devient pas immédiatement une arme de guerre célèbre. Elle apparaît aussi dans les mains de policiers et dans l’imaginaire des années 1920. En 1938, l’armée américaine adopte la M1928A1. À partir de 1942, des versions simplifiées M1 puis M1A1 sont produites. Dans Free Fire, son apparence et ses performances relèvent du gameplay. La vraie histoire, elle, traverse déjà un siècle. Prochain épisode : la P90.",
+  "segments": [
+    {
+      "id": "s01",
+      "words": 23,
+      "text": "Tu as déjà vu la Thompson dans Free Fire. Mais cette silhouette au chargeur rond a été imaginée bien avant les jeux vidéo.",
+      "visualPrompt": "Vertical 9:16 cinematic historical documentary illustration of a historically plausible Thompson Model 1921 museum artefact with wooden furniture, finned barrel and period drum magazine, isolated in a quiet archive gallery, slate-blue background, neutral steel surfaces, restrained warm bronze rim light, realistic stylized materials, fine film grain, controlled highlights, no people, no firing, no gore, no text, no logos.",
+      "motion": "camera-dolly-in with independent foreground dust and slow glass reflection"
+    },
+    {
+      "id": "s02",
+      "words": 27,
+      "text": "À la fin de la Première Guerre mondiale, le général américain John T. Thompson cherche une arme individuelle pour les combats dans les tranchées. Le projet arrive trop tard : les premiers modèles ne sont pas prêts avant l’armistice.",
+      "visualPrompt": "Vertical 9:16 late-1910s American military design office, archival trench-war map, paper sketches and an early Thompson prototype silhouette on a wooden drafting table, no active combat, no soldiers firing, historically grounded uniforms only as distant neutral silhouettes if needed, slate-blue shadows, neutral steel, restrained bronze desk lamp, realistic stylized documentary illustration, paper grain, no readable invented labels, no insignia.",
+      "motion": "slow overhead-to-oblique camera move, layered map parallax, pencil line animation, gentle page movement"
+    },
+    {
+      "id": "s03",
+      "words": 25,
+      "text": "En 1919, le nom « Thompson Submachine Gun » est adopté. Le modèle 1921 entre ensuite en production, avec Auto-Ordnance et Colt.",
+      "visualPrompt": "Vertical 9:16 archival industrial-history composition, 1919 patent-era papers and a period-correct Thompson Model 1921 display artefact in a 1920s American factory showroom, restrained Auto-Ordnance and Colt references only as neutral archival folder labels added in postproduction, slate blue, warm ivory paper, neutral steel and restrained bronze, realistic stylized documentary lighting, no assembly details, no firing, no people.",
+      "motion": "paper layers slide at different depths, date card 1919 resolves into 1921, subtle lateral camera track"
+    },
+    {
+      "id": "s04",
+      "words": 24,
+      "text": "Mais la Thompson ne devient pas immédiatement une arme de guerre célèbre. Elle apparaît aussi dans les mains de policiers et dans l’imaginaire des années 1920.",
+      "visualPrompt": "Vertical 9:16 historically grounded 1920s American city archive scene, period police station evidence display and newspaper printing room, Thompson Model 1921 shown safely as a catalogued artefact behind glass, no criminal glamour, no threatening pose, no readable fake headlines, slate-blue and neutral-steel palette with restrained warm bronze, cinematic documentary realism, fine film grain.",
+      "motion": "sideways tracking shot across newspaper presses and archival glass, newspaper sheets animate in foreground, artefact remains static and museum-like"
+    },
+    {
+      "id": "s05",
+      "words": 27,
+      "text": "En 1938, l’armée américaine adopte la M1928A1. À partir de 1942, des versions simplifiées M1 puis M1A1 sont produites.",
+      "visualPrompt": "Vertical 9:16 World War II American military museum display comparing historically plausible Thompson M1928A1 and later M1/M1A1 variants, clearly separated by archival date cards 1938 and 1942, neutral museum plinths, no ammunition, no combat, no flags or propaganda, slate blue, neutral steel, restrained bronze light, realistic stylized cinematic documentary illustration.",
+      "motion": "controlled camera orbit across three museum plinths, date cards appear in sequence, subtle light shift between models"
+    },
+    {
+      "id": "s06",
+      "words": 24,
+      "text": "Dans Free Fire, son apparence et ses performances relèvent du gameplay. La vraie histoire, elle, traverse déjà un siècle. Prochain épisode : la P90.",
+      "visualPrompt": "Vertical 9:16 split composition, on one side a real Thompson Model 1921 archival museum artefact, on the other a clearly fictional abstract mobile-game-inspired silhouette with no copied interface, no logos and no game character; a small P90 museum silhouette appears on a distant teaser panel, same slate-blue, neutral-steel and restrained warm-bronze grade, cinematic realistic stylized documentary finish, no firing, no people, no gore.",
+      "motion": "two visual layers separate with vertical parallax, camera pulls back to reveal a small P90 teaser card"
+    }
+  ],
+  "sources": [
+    "https://americanhistory.si.edu/collections/object/nmah_416040",
+    "https://americanhistory.si.edu/collections/object/nmah_743453",
+    "https://history.army.mil/html/museums/uniforms/survey_uwa.pdf",
+    "https://ff.garena.com/en/weapons/"
+  ],
+  "productionStatus": {
+    "research": "drafted-with-primary-institutional-sources",
+    "voiceover": "text-ready-audio-not-generated",
+    "visualAssets": "prompts-ready-not-rendered",
+    "audioAlignment": "pending-real-audio",
+    "finalVideo": "not-rendered"
+  }
+}
