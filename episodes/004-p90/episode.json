@@ -1,0 +1,97 @@
+{
+  "id": "004",
+  "title": "P90 — Une silhouette venue de Belgique",
+  "weapon": "P90",
+  "sequence": 4,
+  "language": "fr-FR",
+  "targetSeconds": 56,
+  "voiceProfile": "euro-documentary-fr-01",
+  "narration": "Dans Free Fire, la P90 a une silhouette qu’on n’oublie pas. Mais son histoire commence en Belgique, à la fin des années 1980. À cette époque, FN Herstal imagine une nouvelle arme compacte de défense individuelle, conçue autour d’une munition inédite : la 5,7 par 28 millimètres. L’idée est de créer un ensemble arme-munition adapté à un besoin différent de celui d’un fusil classique. En 1990, FN commercialise le P90. Son format compact et son chargeur placé sur le dessus lui donnent une apparence immédiatement reconnaissable. Plus tard, FN développe aussi le pistolet Five-seveN, utilisant la même munition. En février 2021, le calibre 5,7 par 28 est reconnu comme standard OTAN. Dans Free Fire, les dégâts et la cadence restent des règles de jeu. La vraie histoire est celle d’un projet belge devenu célèbre dans le monde entier. Prochain épisode : la M1014.",
+  "visualStyle": {
+    "look": "cinematic historical documentary, realistic stylized archival illustration",
+    "aspectRatio": "9:16",
+    "palette": [
+      "slate blue",
+      "neutral steel",
+      "restrained warm bronze"
+    ],
+    "exposure": "protect highlights; preserve shadow detail",
+    "contrast": "medium filmic contrast, never crushed",
+    "saturation": "moderate natural saturation",
+    "whiteBalance": "consistent neutral-warm",
+    "texture": "fine film grain, subtle atmospheric depth",
+    "avoid": [
+      "neon",
+      "overexposure",
+      "crushed blacks",
+      "excessive bloom",
+      "game UI",
+      "propaganda",
+      "firing",
+      "gore"
+    ]
+  },
+  "segments": [
+    {
+      "id": "s01",
+      "text": "Dans Free Fire, la P90 a une silhouette qu’on n’oublie pas.",
+      "words": 13,
+      "visualPrompt": "Vertical 9:16 cinematic historical documentary illustration of a real FN P90 displayed safely as a museum artefact, three-quarter view, unmistakable compact silhouette and top-mounted magazine visible, dark slate-blue archive gallery, neutral steel plinth, restrained warm bronze rim light, realistic stylized materials, fine film grain, controlled highlights, no people, no firing, no gore, no text, no logos.",
+      "motion": "slow-dolly-in with independent foreground dust and subtle glass reflection",
+      "sound": "low restrained documentary drone, quiet archive ambience"
+    },
+    {
+      "id": "s02",
+      "text": "Mais son histoire commence en Belgique, à la fin des années 1980. À cette époque, FN Herstal imagine une nouvelle arme compacte de défense individuelle, conçue autour d’une munition inédite : la 5,7 par 28 millimètres.",
+      "words": 39,
+      "visualPrompt": "Vertical 9:16 late-1980s Belgian industrial design archive, anonymous engineers' hands reviewing period paper sketches and a conceptual compact personal-defence weapon silhouette on a drafting table, subtle map outline of Belgium in the background, historically grounded workshop, slate-blue shadows, warm ivory paper, neutral steel tools, restrained bronze desk light, realistic stylized documentary illustration, no company logo, no readable fake text, no weapon assembly detail, no people identifiable.",
+      "motion": "overhead-to-oblique camera drift, layered tracing paper parallax, pencil line animates across the drawing",
+      "sound": "paper movement, pencil on tracing paper, quiet workshop room tone"
+    },
+    {
+      "id": "s03",
+      "text": "L’idée est de créer un ensemble arme-munition adapté à un besoin différent de celui d’un fusil classique.",
+      "words": 19,
+      "visualPrompt": "Vertical 9:16 museum-style editorial comparison showing a compact FN P90 silhouette beside a neutral archival concept board representing a new personal-defence category, non-technical and non-instructional, no ammunition close-up, slate-blue background, warm ivory panels, neutral steel and restrained bronze, cinematic side lighting, realistic stylized documentary art, no diagrams of internal mechanisms, no text, no firing.",
+      "motion": "slow lateral parallax between two display panels; a soft light sweep separates the concepts",
+      "sound": "subtle mechanical room ambience, muted low note"
+    },
+    {
+      "id": "s04",
+      "text": "En 1990, FN commercialise le P90. Son format compact et son chargeur placé sur le dessus lui donnent une apparence immédiatement reconnaissable.",
+      "words": 25,
+      "visualPrompt": "Vertical 9:16 early-1990s European industrial product presentation, FN P90 as a historically plausible 1990-era museum artefact on a clean exhibition plinth, top-mounted magazine and compact overall outline clearly visible, anonymous exhibition hall, slate blue, neutral steel, restrained warm bronze lighting, realistic stylized cinematic documentary illustration, no corporate logo, no firing, no people, no readable text.",
+      "motion": "controlled quarter-orbit around the static museum artefact; exhibition lights rise gently one by one",
+      "sound": "soft exhibition hall ambience, understated tonal accent"
+    },
+    {
+      "id": "s05",
+      "text": "Plus tard, FN développe aussi le pistolet Five-seveN, utilisant la même munition. En février 2021, le calibre 5,7 par 28 est reconnu comme standard OTAN.",
+      "words": 29,
+      "visualPrompt": "Vertical 9:16 archival documentary composition showing a FN P90 and a FN Five-seveN as separate museum artefacts on two plinths, with a restrained institutional standards document in the background suggesting the 2021 NATO recognition of the 5.7x28mm calibre, no ammunition close-up, no insignia, no flags, slate-blue and neutral-steel palette, restrained bronze highlights, realistic stylized editorial illustration, no readable fake text, no firing.",
+      "motion": "slow focus shift from the P90 to the companion pistol, then a document page turns to reveal a 2021 date card",
+      "sound": "paper turn, quiet institutional room tone, gentle musical lift"
+    },
+    {
+      "id": "s06",
+      "text": "Dans Free Fire, les dégâts et la cadence restent des règles de jeu. La vraie histoire est celle d’un projet belge devenu célèbre dans le monde entier. Prochain épisode : la M1014.",
+      "words": 32,
+      "visualPrompt": "Vertical 9:16 closing split composition: left side a real FN P90 museum artefact in a restrained archival gallery; right side a clearly fictional abstract mobile-game-inspired silhouette, no copied interface or logos; a small M1014 museum silhouette appears on a distant teaser card, same slate-blue, neutral-steel and restrained warm-bronze grade, realistic stylized cinematic documentary finish, no firing, no people, no gore, no text.",
+      "motion": "vertical split slides apart in layered parallax, camera pulls back to reveal the M1014 teaser card",
+      "sound": "warm restrained resolution, short soft end accent"
+    }
+  ],
+  "sourceNotes": [
+    "FN Herstal states that it began designing the 5.7x28mm cartridge in the late 1980s and simultaneously designed the P90; the Five-seveN came later.",
+    "FN Browning Group's 2024 activity report lists 1990 as the year FN Herstal marketed the P90 and Five-seveN in 5.7x28mm.",
+    "FN Herstal announced on 25 February 2021 that 5.7x28mm had been recognized as a NATO calibre under STANAG 4509.",
+    "Garena's official Free Fire weapons catalogue lists the P90 as an SMG; in-game stats are game mechanics, not historical specifications."
+  ],
+  "sources": [
+    "https://fnherstal.com/en/security/ammunition/57x28mm/",
+    "https://fnherstal.com/en/defence/portable-weapons/fn-p90/",
+    "https://fnherstal.com/en/5-7x28mm/",
+    "https://fnbrowninggroup.com/app/uploads/2025/07/FN_rapport_d_activite_2024_fr_web.pdf",
+    "https://ff.garena.com/pt/weapons/"
+  ]
+}
